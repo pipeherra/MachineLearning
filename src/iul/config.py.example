@@ -1,0 +1,4 @@
+class Config:
+    def __init__(self):
+        self.host = "https://iul.fh-muenster.de/api"
+        self.token = "TOKEN"
