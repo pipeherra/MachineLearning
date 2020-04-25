@@ -1,6 +1,5 @@
-import numpy as np
-
 from iul.iul import IUL
+from signals.statistics import Statistics
 
 iul = IUL(False)
 exercise_id = "median"
@@ -13,20 +12,9 @@ signal_results = []
 for data_signal in data_signals:
     signal_id = data_signal["id"]
     signal_values = data_signal["values"]
-    signal_values = np.sort(signal_values)
-    values_len = len(signal_values)
-
-    median = 0.0
-    if values_len % 2 == 0:
-        middle = int(values_len / 2)
-        median = (signal_values[middle - 1] + signal_values[middle]) / 2
-    else:
-        middle = int((values_len - 1) / 2)
-        median = signal_values[middle]
-
     signal_result = {
         'id': signal_id,
-        'median': median
+        'median': Statistics.get_median(signal_values)
     }
     signal_results.append(signal_result)
 result = {
