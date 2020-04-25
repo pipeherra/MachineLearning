@@ -1,0 +1,80 @@
+{
+  "description": "Dataset for MEuML",
+  "sensors": [{
+      "id": "01324188",
+      "description": "left lower leg"
+    }, {
+      "id": "01324189",
+      "description": "left upper leg"
+    }, {
+      "id": "01324180",
+      "description": "left lower arm"
+    }, {
+      "id": "01324185",
+      "description": "left upper arm"
+    }, {
+      "id": "01324181",
+      "description": "back torso"
+  }],
+  "data": [{
+    "filename": "2016-04-11_1530_1536_walking",
+    "description": "Walking",
+    "comment": "Right turns only, 3 stair steps at 30s mark",
+    "frequency": 60,
+    "timeout": 100,
+    "start": 1460381417436,
+    "end": 1460381756071,
+    "ignore": [
+      [1, 2],
+      [2, 3]
+    ]
+  }, {
+    "filename": "2016-04-11_1538_1540_standing",
+    "description": "Standing",
+    "comment": null,
+    "frequency": 60,
+    "timeout": 100,
+    "start": 1460381886864,
+    "end": 1460382005764,
+    "ignore": [
+      [1, 2],
+      [2, 3]
+    ]
+  }, {
+    "filename": "2016-04-11_1540_1544_backwards",
+    "description": "Walking backwards",
+    "comment": null,
+    "frequency": 60,
+    "timeout": 100,
+    "start": 1460382058536,
+    "end": 1460382238037,
+    "ignore": [
+      [1, 2],
+      [2, 3]
+    ]
+  }, {
+    "filename": "2016-04-11_1550_1555_stairs",
+    "description": "Climb Stairs",
+    "comment": "5 plateaus, 13 steps, 4 stairways",
+    "frequency": 60,
+    "timeout": 100,
+    "start": 1460382622373,
+    "end": 1460382809057,
+    "ignore": [
+      [1, 2],
+      [2, 3]
+    ]
+  }, {
+    "filename": "2016-04-11_1556_1559_jogging",
+    "description": "Jogging",
+    "comment": null,
+    "frequency": 60,
+    "timeout": 100,
+    "start": 1460382968595,
+    "end": 1460383151112,
+    "ignore": [
+      [1, 2],
+      [2, 3]
+    ]
+  }]
+}

@@ -1,0 +1,2 @@
+Damit das m-file funktioniert, muss die Kopfzeile aus dem Datensatz gelöscht werden.
+Das m-file speichert die Daten für die Sensoren in einzelenen Dateien und plotet alle Daten von den eizelnenn Sensoren.

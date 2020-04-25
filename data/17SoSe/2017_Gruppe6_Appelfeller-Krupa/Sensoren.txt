@@ -1,0 +1,5 @@
+Unterarm: 		01324180
+Oberarm: 		01324185
+Oberschenkel: 	01324184
+Unterschenkel: 01324187
+Rücken: 		01324186
