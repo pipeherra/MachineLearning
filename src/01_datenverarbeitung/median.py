@@ -1,6 +1,6 @@
 import numpy as np
 
-from iul.iul import IUL
+from src.iul.iul import IUL
 
 iul = IUL(False)
 exercise_id = "median"

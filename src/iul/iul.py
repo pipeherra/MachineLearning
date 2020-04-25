@@ -3,7 +3,7 @@ from pprint import pprint
 import requests
 import json
 
-from iul.config import Config
+from src.iul.config import Config
 
 
 class IUL:

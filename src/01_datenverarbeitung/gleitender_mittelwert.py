@@ -1,4 +1,4 @@
-from iul.iul import IUL
+from src.iul.iul import IUL
 
 iul = IUL(False)
 exercise_id = "moving_average"
