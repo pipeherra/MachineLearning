@@ -1,6 +1,7 @@
 import math
 import numpy
 
+
 class Statistics:
     @staticmethod
     def get_mean(signals):
