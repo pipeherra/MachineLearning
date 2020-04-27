@@ -1,5 +1,5 @@
-from iul.iul import IUL
-from signals.statistics import Statistics
+from src.iul.iul import IUL
+from src.signals.statistics import Statistics
 
 iul = IUL(False)
 exercise_id = "median"
