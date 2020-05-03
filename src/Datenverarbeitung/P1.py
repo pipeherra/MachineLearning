@@ -10,7 +10,7 @@ from src.signals.statistics import *
 #data_file = pd.read_csv('C:/Users/Andres/meuml/data/17SoSe/2017_Gruppe1/huepfen_P1.csv')
 
 # Mac
-data_file = pd.read_csv('/Users/andresherrera/PycharmProjects/meuml/data/17SoSe/2017_Gruppe1/huepfen_P1.csv')
+data_file = pd.read_csv('/Users/andresherrera/PycharmProjects/meuml/data/17SoSe/2017_Gruppe6_Appelfeller-Krupa/ruhe.csv')
 
 #data_file = pd.read_csv('C:/Users/Andres/meuml/src/Datenverarbeitung/s0001.csv')
 
@@ -18,7 +18,7 @@ time = []
 sensor_data = []
 temp_data_file = []
 
-part = 'back'
+part = 'lower arm'
 
 if part == 'lower arm':
     temp_data_file = data_file.loc[data_file['ID'] == 1324187]
@@ -33,6 +33,9 @@ elif part == 'back':
 
 time = temp_data_file['Timestamp']
 #time = time - time[0]
+
+# ToDo: gesamte Zeit
+# Todo: Stdabweichung Ruhe
 
 sensor_data = temp_data_file.iloc[:, 2:11]
 
@@ -62,7 +65,7 @@ for key, val in sensors.items():
         y3 = sensor_data.iloc[:, column[2]]
 
         plt.scatter(time, y1, alpha=0.8, c=val['color'], edgecolors='none', s=30, label=val['group'], marker='x')
-        plt.scatter(time, y2, alpha=0.8, c=val['color'], edgecolors='none', s=30, label=val['group'], marker='1')
-        plt.scatter(time, y3, alpha=0.8, c=val['color'], edgecolors='none', s=30, label=val['group'], marker='+')
+        #plt.scatter(time, y2, alpha=0.8, c=val['color'], edgecolors='none', s=30, label=val['group'], marker='1')
+        #plt.scatter(time, y3, alpha=0.8, c=val['color'], edgecolors='none', s=30, label=val['group'], marker='+')
 
 plt.show()
