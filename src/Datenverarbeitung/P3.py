@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-from signals.statistics import Statistics
+from src.signals.statistics import Statistics
 
 data = pd.read_csv('../../data/s0001.csv')
 yvalues = data['f3']

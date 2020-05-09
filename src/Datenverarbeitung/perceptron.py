@@ -1,34 +1,26 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 
-class Perceptron(object):
+class Perceptron:
 
-    def __init__(self, no_of_inputs, threshold=10000, learning_rate=0.01):
-        """
-        :param no_of_inputs:  wie viele weights
-        :param threshold: wie viele iterationen z.B 10000
-        :param learning_rate: Rate für die Steps z.B 0,01
-        """
-        self.threshold = threshold
-        self.learning_rate = learning_rate
-        self.weights = np.zeros(no_of_inputs + 1)
+    # tanh Transfger Function
+    def activation(self, x):
+        t = (np.exp(x) - np.exp(-x)) / (np.exp(x) + np.exp(-x))
+        return t
 
-    def predict(self, inputs):
+    # Default constructor for a perceptron
+    def __init__(self, maxEpochs, learning_rate, features):
+        self.w = -1 + np.random.rand(features + 1) * 2  # Initialize weights randomly on range [-1:1]
+        self.maxEpochs = maxEpochs  # Max iterations
+        self.learning_rate = learning_rate  # Learning rate
 
-        summation = np.dot(inputs, self.weights[1:]) + self.weights[0]  # w1*x1 + w2*x2 + w0
-        if summation > 0:
-            activation = 1
-        else:
-            activation = 0
-        return activation
+    # Function to provide a guess for a specific input
+    def guess(self, input):
+        sum = 0
+        for i in range(0, len(self.w)):
+            sum += self.w[i] * input[i]
+        return self.activation(sum)
 
-    def train(self, training_inputs, labels):
-        """
-        :param training_inputs: inputs für predict()
-        :param labels: Liste von Ergebnisse
-        """
-        for _ in range(self.threshold):
-            for inputs, label in zip(training_inputs, labels):
-                prediction = self.predict(inputs)
-                self.weights[1:] += self.learning_rate * (label - prediction) * inputs
-                self.weights[0] += self.learning_rate * (label - prediction)
+    def trin(self):
+        pass
