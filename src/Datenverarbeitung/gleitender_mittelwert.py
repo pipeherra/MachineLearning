@@ -15,7 +15,7 @@ for data_signal in data_signals:
     signal_window = data_signal["window"]
     signal_result = {
         'id': signal_id,
-        'values': Statistics.get_moving_average(signal_values, signal_window)
+        'values': Statistics.get_moving_average(signal_values, signal_window).tolist()
     }
     signal_results.append(signal_result)
 
