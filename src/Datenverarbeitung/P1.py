@@ -21,20 +21,20 @@ temp_data_file = []
 part = 'lower arm'
 
 if part == 'lower arm':
-    temp_data_file = data_file.loc[data_file['ID'] == 1324187]
+    temp_data_file = data_file.loc[data_file['ID'] == 1324180]
 elif part == 'upper arm':
-    temp_data_file = data_file.loc[data_file['ID'] == 1324186]
-elif part == 'upper leg':
     temp_data_file = data_file.loc[data_file['ID'] == 1324185]
 elif part == 'upper leg':
     temp_data_file = data_file.loc[data_file['ID'] == 1324184]
+elif part == 'lower leg':
+    temp_data_file = data_file.loc[data_file['ID'] == 1324187]
 elif part == 'back':
-    temp_data_file = data_file.loc[data_file['ID'] == 1324180]
+    temp_data_file = data_file.loc[data_file['ID'] == 1324186]
 
 time = temp_data_file['Timestamp']
 #time = time - time[0]
 
-# ToDo: gesamte Zeit
+# ToDo: gesamte Zeit. 1 minute.
 # Todo: Stdabweichung Ruhe
 
 sensor_data = temp_data_file.iloc[:, 2:11]

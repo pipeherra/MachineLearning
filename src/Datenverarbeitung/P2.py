@@ -2,7 +2,7 @@ import pandas as pd
 
 from src.signals.statistics import Statistics
 
-data = pd.read_csv('../../data/17SoSe/2017_Gruppe1/huepfen_P1.csv')
+data = pd.read_csv('../../data/19SoSe/2019_daten_grp2/ruhelage.csv')
 
 columns = list(data)
 
