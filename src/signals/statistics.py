@@ -51,3 +51,11 @@ class Statistics:
         standard_deviation /= (len(signals) - delta)
         standard_deviation = math.sqrt(standard_deviation)
         return standard_deviation
+
+    @staticmethod
+    def get_timestamps_normalized(timestamps):
+        time0 = timestamps.min()
+        timestamps_normalized = []
+        for timestamp in timestamps:
+            timestamps_normalized.append(timestamp - time0)
+        return timestamps_normalized
