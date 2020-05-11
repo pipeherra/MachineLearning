@@ -59,3 +59,9 @@ class Statistics:
         for timestamp in timestamps:
             timestamps_normalized.append(timestamp - time0)
         return timestamps_normalized
+
+    @staticmethod
+    def get_len(timestamps):
+        time_min = timestamps.min()
+        time_max = timestamps.max()
+        return time_max - time_min
