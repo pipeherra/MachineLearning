@@ -9,14 +9,14 @@ request_data_session = request_data["session"]
 attribute_count = request_data["attribute-count"]
 data_array = request_data["data"]
 
-perceptron = Perceptron()
-
 results = []
 for data in data_array:
     data_id = data["id"]
     data_weights = data["weights"]
     data_inputs = data["input"]
-    data_value = perceptron.predict_with_normalized_tan(data_weights, data_inputs)
+    data_inputs.insert(0, 1.0)
+    perceptron = Perceptron(data_weights)
+    data_value = perceptron.predict_with_normalized_tan(data_inputs)
 
     data_result = {
         'id': data_id,
