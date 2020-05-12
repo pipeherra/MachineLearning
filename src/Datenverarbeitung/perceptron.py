@@ -1,4 +1,5 @@
 import math
+import numpy as np
 
 
 class Perceptron:
@@ -28,4 +29,10 @@ class Perceptron:
         for i in range(len(data_inputs)):
             self.weights[i] += self.learning_rate * error * data_inputs[i]
         return self.weights
+
+    @staticmethod
+    def get_perceptron(threshold, features, lerning_rate):
+        initial_weights = np.zeros(features + 1)
+        initial_weights[0] = threshold
+        return Perceptron(initial_weights, lerning_rate)
 
