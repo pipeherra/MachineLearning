@@ -68,8 +68,8 @@ for i in range(len(data_array)):
         perceptron.train_weights(data.gehen_features, 1.0)
     else:
         print("Predicting Ruhe: Expected: {}, Predicted: {}"
-              .format(0.0, perceptron.predict_with_normalized_tan(data.ruhe_features)))
+              .format(0.0, perceptron.predict(data.ruhe_features)))
         print("Predicting Gehen: Expected: {}, Predicted: {}"
-              .format(1.0, perceptron.predict_with_normalized_tan(data.gehen_features)))
+              .format(1.0, perceptron.predict(data.gehen_features)))
 plt.legend()
 plt.show()

@@ -15,8 +15,8 @@ for data in data_array:
     data_weights = data["weights"]
     data_inputs = data["input"]
     data_inputs.insert(0, 1.0)
-    perceptron = Perceptron(data_weights)
-    data_value = perceptron.predict_with_normalized_tan(data_inputs)
+    perceptron = Perceptron(Perceptron.normalized_tanh, data_weights)
+    data_value = perceptron.predict(data_inputs)
 
     data_result = {
         'id': data_id,
@@ -30,4 +30,3 @@ result = {
 }
 
 iul.post_result(exercise_id, result)
-

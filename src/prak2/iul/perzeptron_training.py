@@ -11,7 +11,7 @@ learning_rate = request_data["learning-rate"]
 initial_weights = request_data["initial-weights"]
 training_data_array = request_data["training-data"]
 
-perceptron = Perceptron(initial_weights, learning_rate)
+perceptron = Perceptron(Perceptron.normalized_tanh, initial_weights, learning_rate)
 
 results = []
 for training_data in training_data_array:
