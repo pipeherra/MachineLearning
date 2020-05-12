@@ -36,7 +36,7 @@ for i in range(14):
     ruhe_range = ruhe_data[(ruhe_data.Timestamp_normalized >= start) & (ruhe_data.Timestamp_normalized <= end)]
     gehen_range_stddev = Statistics.get_standard_deviation(gehen_range['accelX (m/s^2)'])
     ruhe_range_stddev = Statistics.get_standard_deviation(ruhe_range['accelX (m/s^2)'])
-    data_array.append(P5Data(i, start, end, ruhe_range_stddev, gehen_range_stddev))
+    data_array.append(P5Data(i, start, end, [1.0, ruhe_range_stddev], [1.0, gehen_range_stddev]))
 
 perceptron = Perceptron.get_perceptron(threshold, features, 0.5)
 random.shuffle(data_array)
@@ -44,18 +44,18 @@ random.shuffle(data_array)
 for i in range(len(data_array)):
     data = data_array[i]
     if i == 0:
-        plt.hlines(data.gehen_stddev, data.start, data.end, colors='orange', label='Stddev-Gehen')
-        plt.hlines(data.ruhe_stddev, data.start, data.end, colors='silver', label='Stddev-Ruhe')
+        plt.hlines(data.gehen_features[1], data.start, data.end, colors='orange', label='Stddev-Gehen')
+        plt.hlines(data.ruhe_features[1], data.start, data.end, colors='silver', label='Stddev-Ruhe')
     else:
-        plt.hlines(data.gehen_stddev, data.start, data.end, colors='orange')
-        plt.hlines(data.ruhe_stddev, data.start, data.end, colors='silver')
+        plt.hlines(data.gehen_features[1], data.start, data.end, colors='orange')
+        plt.hlines(data.ruhe_features[1], data.start, data.end, colors='silver')
     if i < 10:
-        perceptron.train_weights([1.0, data.ruhe_stddev], 0.0)
-        perceptron.train_weights([1.0, data.gehen_stddev], 1.0)
+        perceptron.train_weights(data.ruhe_features, 0.0)
+        perceptron.train_weights(data.gehen_features, 1.0)
     else:
         print("Predicting Ruhe: Expected: {}, Predicted: {}"
-              .format(0.0, perceptron.predict_with_normalized_tan([1.0, data.ruhe_stddev])))
+              .format(0.0, perceptron.predict_with_normalized_tan(data.ruhe_features)))
         print("Predicting Gehen: Expected: {}, Predicted: {}"
-              .format(1.0, perceptron.predict_with_normalized_tan([1.0, data.gehen_stddev])))
+              .format(1.0, perceptron.predict_with_normalized_tan(data.gehen_features)))
 plt.legend()
 plt.show()
