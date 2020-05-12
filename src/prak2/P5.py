@@ -4,11 +4,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from Datenverarbeitung.perceptron import Perceptron
+from Datenverarbeitung.sensor import Sensor
 from prak2.P5_data import P5Data
 from src.signals.statistics import Statistics
 
 threshold = 0.5
-features = 1
 
 gehen_data = pd.read_csv('../../data/17SoSe/2017_Gruppe6_Appelfeller-Krupa/gehen.csv')
 # walking starts not directly. Need to move the series
@@ -27,6 +27,8 @@ plt.scatter(ruhe_data['Timestamp_normalized'], ruhe_data['accelX (m/s^2)'], labe
 plt.scatter(gehen_data['Timestamp_normalized'], gehen_data['accelX (m/s^2)'], label='gehen')
 
 data_array = []
+sensors = Sensor.get_sensors()
+features = 1 + len(sensors)
 
 for i in range(14):
     start = i * 1500
@@ -36,7 +38,15 @@ for i in range(14):
     ruhe_range = ruhe_data[(ruhe_data.Timestamp_normalized >= start) & (ruhe_data.Timestamp_normalized <= end)]
     gehen_range_stddev = Statistics.get_standard_deviation(gehen_range['accelX (m/s^2)'])
     ruhe_range_stddev = Statistics.get_standard_deviation(ruhe_range['accelX (m/s^2)'])
-    data_array.append(P5Data(i, start, end, [1.0, ruhe_range_stddev], [1.0, gehen_range_stddev]))
+    ruhe_features = [1.0, ruhe_range_stddev]
+    gehen_features = [1.0, gehen_range_stddev]
+    if features > 1:
+        for sensor in sensors:
+            ruhe_sensor = ruhe_range[ruhe_range['ID'] == sensor.id]
+            gehen_sensor = gehen_range[gehen_range['ID'] == sensor.id]
+            gehen_features.append(Statistics.get_standard_deviation(gehen_sensor['accelX (m/s^2)']))
+            ruhe_features.append(Statistics.get_standard_deviation(ruhe_sensor['accelX (m/s^2)']))
+    data_array.append(P5Data(i, start, end, ruhe_features, gehen_features))
 
 perceptron = Perceptron.get_perceptron(threshold, features, 0.5)
 random.shuffle(data_array)

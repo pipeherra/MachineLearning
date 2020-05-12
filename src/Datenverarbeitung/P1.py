@@ -10,7 +10,7 @@ from src.signals.statistics import *
 #data_file = pd.read_csv('C:/Users/Andres/meuml/data/17SoSe/2017_Gruppe1/huepfen_P1.csv')
 
 # Mac
-data_file = pd.read_csv('/Users/andresherrera/PycharmProjects/meuml/data/17SoSe/2017_Gruppe6_Appelfeller-Krupa/ruhe.csv')
+data_file = pd.read_csv('../../data/17SoSe/2017_Gruppe6_Appelfeller-Krupa/ruhe.csv')
 
 #data_file = pd.read_csv('C:/Users/Andres/meuml/src/Datenverarbeitung/s0001.csv')
 
