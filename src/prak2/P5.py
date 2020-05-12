@@ -30,9 +30,13 @@ data_array = []
 sensors = Sensor.get_sensors()
 features = 1 + len(sensors)
 
-for i in range(40):
-    start = i * 200
-    end = (i + 1) * 200
+window_size = 500 #timestamps
+moving_size = 200
+window_count = int(21000/moving_size)
+
+for i in range(window_count):
+    start = i * moving_size
+    end = i * moving_size + window_size
     gehen_range = gehen_data[(gehen_data.Timestamp_normalized >= start)
                              & (gehen_data.Timestamp_normalized <= end)]
     ruhe_range = ruhe_data[(ruhe_data.Timestamp_normalized >= start) & (ruhe_data.Timestamp_normalized <= end)]
@@ -59,7 +63,7 @@ for i in range(len(data_array)):
     else:
         plt.hlines(data.gehen_features[1], data.start, data.end, colors='orange')
         plt.hlines(data.ruhe_features[1], data.start, data.end, colors='silver')
-    if i < 10:
+    if i < int(window_count * 2 / 3):
         perceptron.train_weights(data.ruhe_features, 0.0)
         perceptron.train_weights(data.gehen_features, 1.0)
     else:
