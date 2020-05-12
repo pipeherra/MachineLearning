@@ -17,14 +17,13 @@ class Perceptron:
             data_sum += data_weight * data_input
         return self.transfer_function(data_sum)
 
-    def train_weights(self, data_inputs, data_expected, ):
-        if len(data_inputs) != len(self.weights):
-            print("len not equal")
-            return
-        prediction = self.predict(data_inputs)
-        error = data_expected - prediction
-        for i in range(len(data_inputs)):
-            self.weights[i] += self.learning_rate * error * data_inputs[i]
+    def update_weights(self, learning_data):
+        if len(learning_data.inputs) != len(self.weights):
+            raise AttributeError('Len not equal')
+        prediction = self.predict(learning_data.inputs)
+        error = learning_data.expected - prediction
+        for i in range(len(self.weights)):
+            self.weights[i] += self.learning_rate * error * learning_data.inputs[i]
         return self.weights
 
     @staticmethod

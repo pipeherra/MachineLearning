@@ -1,3 +1,4 @@
+from algorithmen.training_data import TrainingData
 from algorithmen.perceptron import Perceptron
 from src.iul.iul import IUL
 
@@ -19,7 +20,7 @@ for training_data in training_data_array:
     data_inputs = training_data["input"]
     data_inputs.insert(0, 1.0)
     data_expected = training_data['class']
-    result_weights = perceptron.train_weights(data_inputs, data_expected)
+    result_weights = perceptron.update_weights(TrainingData(data_inputs, data_expected))
     data_result = {
         'id': data_id,
         'weights': result_weights.copy()

@@ -3,6 +3,7 @@ import random
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from algorithmen.training_data import TrainingData
 from algorithmen.perceptron import Perceptron
 from misc.sensor import Sensor
 from prak2.P5_data import P5Data
@@ -64,8 +65,8 @@ for i in range(len(data_array)):
         plt.hlines(data.gehen_features[1], data.start, data.end, colors='orange')
         plt.hlines(data.ruhe_features[1], data.start, data.end, colors='silver')
     if i < int(window_count * 2 / 3):
-        perceptron.train_weights(data.ruhe_features, 0.0)
-        perceptron.train_weights(data.gehen_features, 1.0)
+        perceptron.update_weights(TrainingData(data.ruhe_features, 0.0))
+        perceptron.update_weights(TrainingData(data.gehen_features, 1.0))
     else:
         print("Predicting Ruhe: Expected: {}, Predicted: {}"
               .format(0.0, perceptron.predict(data.ruhe_features)))
