@@ -1,4 +1,3 @@
-from src.signals.ploting import *
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -33,9 +32,6 @@ elif part == 'back':
 
 time = temp_data_file['Timestamp']
 #time = time - time[0]
-
-# ToDo: gesamte Zeit. 1 minute.
-# Todo: Stdabweichung Ruhe
 
 sensor_data = temp_data_file.iloc[:, 2:11]
 

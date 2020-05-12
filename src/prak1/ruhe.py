@@ -1,6 +1,6 @@
 import pandas as pd
 
-from Datenverarbeitung.sensor import Sensor
+from misc.sensor import Sensor
 from signals.statistics import Statistics
 
 data = pd.read_csv("../../data/17SoSe/2017_Gruppe6_Appelfeller-Krupa/ruhe.csv")
@@ -15,7 +15,7 @@ for sensor in sensors:
     for column in columns:
         if column in ['ID', 'Timestamp']:
             continue
-        values = data[column]
+        values = data_filtered[column]
         print("\t{}: Mittelwert: {}, Median: {}, Standardabweichung: {}"
               .format(column, Statistics.get_mean(values),
                       Statistics.get_median(values),

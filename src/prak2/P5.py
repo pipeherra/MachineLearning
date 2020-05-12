@@ -3,8 +3,8 @@ import random
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from Datenverarbeitung.perceptron import Perceptron
-from Datenverarbeitung.sensor import Sensor
+from algorithmen.perceptron import Perceptron
+from misc.sensor import Sensor
 from prak2.P5_data import P5Data
 from src.signals.statistics import Statistics
 
@@ -30,9 +30,9 @@ data_array = []
 sensors = Sensor.get_sensors()
 features = 1 + len(sensors)
 
-for i in range(14):
-    start = i * 1500
-    end = (i + 1) * 1500
+for i in range(40):
+    start = i * 200
+    end = (i + 1) * 200
     gehen_range = gehen_data[(gehen_data.Timestamp_normalized >= start)
                              & (gehen_data.Timestamp_normalized <= end)]
     ruhe_range = ruhe_data[(ruhe_data.Timestamp_normalized >= start) & (ruhe_data.Timestamp_normalized <= end)]

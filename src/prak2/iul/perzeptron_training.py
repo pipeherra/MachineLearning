@@ -1,4 +1,4 @@
-from src.Datenverarbeitung.perceptron import Perceptron
+from algorithmen.perceptron import Perceptron
 from src.iul.iul import IUL
 
 iul = IUL(False)
