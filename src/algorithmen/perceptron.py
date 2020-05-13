@@ -26,6 +26,26 @@ class Perceptron:
             self.weights[i] += self.learning_rate * error * learning_data.inputs[i]
         return self.weights
 
+    def train_weight(self, training_data_array):
+        updates = 0
+        wrong_predictions = np.inf
+        while wrong_predictions != 0 and updates < 100000:
+            wrong_predictions = 0
+            for training_data in training_data_array:
+                prediction = self.predict(training_data.inputs)
+                error = training_data.expected - prediction
+                if error != 0.0:
+                    updates += 1
+                    for i in range(len(self.weights)):
+                        self.weights[i] += self.learning_rate * error * training_data.inputs[i]
+                    break
+            for training_data in training_data_array:
+                prediction = self.predict(training_data.inputs)
+                if prediction != training_data.expected:
+                    wrong_predictions += 1
+            print("Data_Count: {}, Wrong_Predictions: {}, Error-Rate: {}, Total-Updates: {}"
+                  .format(len(training_data_array), wrong_predictions, wrong_predictions/len(training_data_array), updates))
+
     @staticmethod
     def normalized_tanh(data_sum):
         return (math.tanh(data_sum) * 0.5) + 0.5

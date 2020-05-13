@@ -53,8 +53,11 @@ for i in range(window_count):
             ruhe_features.append(Statistics.get_standard_deviation(ruhe_sensor['accelX (m/s^2)']))
     data_array.append(P5Data(i, start, end, ruhe_features, gehen_features))
 
-perceptron = Perceptron.get_perceptron(threshold, features, 0.5)
+perceptron = Perceptron.get_perceptron(threshold, features, 0.1)
 random.shuffle(data_array)
+
+training_data_array = []
+prediction_data_array = []
 
 for i in range(len(data_array)):
     data = data_array[i]
@@ -65,12 +68,16 @@ for i in range(len(data_array)):
         plt.hlines(data.gehen_features[1], data.start, data.end, colors='orange')
         plt.hlines(data.ruhe_features[1], data.start, data.end, colors='silver')
     if i < int(window_count * 2 / 3):
-        perceptron.update_weights(TrainingData(data.ruhe_features, 0.0))
-        perceptron.update_weights(TrainingData(data.gehen_features, 1.0))
+        training_data_array.append(TrainingData(data.ruhe_features, 0.0))
+        training_data_array.append(TrainingData(data.gehen_features, 1.0))
     else:
-        print("Predicting Ruhe: Expected: {}, Predicted: {}"
-              .format(0.0, perceptron.predict(data.ruhe_features)))
-        print("Predicting Gehen: Expected: {}, Predicted: {}"
-              .format(1.0, perceptron.predict(data.gehen_features)))
+        prediction_data_array.append(TrainingData(data.ruhe_features, 0.0))
+        prediction_data_array.append(TrainingData(data.gehen_features, 1.0))
+
+perceptron.train_weight(training_data_array)
+
+for prediction_data in prediction_data_array:
+    print("Predicting: Expected: {}, Predicted: {}"
+          .format(prediction_data.expected, perceptron.predict(prediction_data.inputs)))
 plt.legend()
 plt.show()
