@@ -1,4 +1,6 @@
 import math
+import random
+
 import numpy as np
 
 
@@ -17,6 +19,15 @@ class Perceptron:
             data_sum += data_weight * data_input
         return self.transfer_function(data_sum)
 
+    def test_weights(self, data_inputs, test_weights):
+        if len(self.weights) != len(data_inputs):
+            print("Len not equal")
+            return
+        data_sum = 0.0
+        for (data_weight, data_input) in zip(test_weights, data_inputs):
+            data_sum += data_weight * data_input
+        return self.transfer_function(data_sum)
+
     def update_weights(self, learning_data):
         if len(learning_data.inputs) != len(self.weights):
             raise AttributeError('Len not equal')
@@ -26,25 +37,41 @@ class Perceptron:
             self.weights[i] += self.learning_rate * error * learning_data.inputs[i]
         return self.weights
 
-    def train_weight(self, training_data_array):
+    def train_weight(self, training_data_array, pocket):
         updates = 0
         wrong_predictions = np.inf
+        last_wrong_predictions = wrong_predictions
+        weights = self.weights.copy()
         while wrong_predictions != 0 and updates < 100000:
             wrong_predictions = 0
             for training_data in training_data_array:
-                prediction = self.predict(training_data.inputs)
+                prediction = self.test_weights(training_data.inputs, weights)
                 error = training_data.expected - prediction
                 if error != 0.0:
                     updates += 1
                     for i in range(len(self.weights)):
-                        self.weights[i] += self.learning_rate * error * training_data.inputs[i]
+                        weights[i] += self.learning_rate * error * training_data.inputs[i]
                     break
             for training_data in training_data_array:
-                prediction = self.predict(training_data.inputs)
+                prediction = self.test_weights(training_data.inputs, weights)
                 if prediction != training_data.expected:
                     wrong_predictions += 1
-            print("Data_Count: {}, Wrong_Predictions: {}, Error-Rate: {}, Total-Updates: {}"
-                  .format(len(training_data_array), wrong_predictions, wrong_predictions/len(training_data_array), updates))
+            if pocket:
+                if wrong_predictions < last_wrong_predictions:
+                    self.weights = weights.copy()
+                    last_wrong_predictions = wrong_predictions
+                    print("Updated Weights: Data_Count: {}, Wrong_Predictions: {}, Error-Rate: {}, Total-Updates: {}"
+                          .format(len(training_data_array), wrong_predictions,
+                                  wrong_predictions/len(training_data_array), updates))
+                else:
+                    print("Discarded Weights: Data_Count: {}, Wrong_Predictions: {}, Error-Rate: {}, Total-Updates: {}"
+                          .format(len(training_data_array), wrong_predictions,
+                                  wrong_predictions / len(training_data_array), updates))
+            else:
+                print("Data_Count: {}, Wrong_Predictions: {}, Error-Rate: {}, Total-Updates: {}"
+                      .format(len(training_data_array), wrong_predictions,
+                              wrong_predictions / len(training_data_array), updates))
+
 
     @staticmethod
     def normalized_tanh(data_sum):

@@ -74,7 +74,7 @@ for i in range(len(data_array)):
         prediction_data_array.append(TrainingData(data.ruhe_features, 0.0))
         prediction_data_array.append(TrainingData(data.gehen_features, 1.0))
 
-perceptron.train_weight(training_data_array)
+perceptron.train_weight(training_data_array, True)
 
 for prediction_data in prediction_data_array:
     print("Predicting: Expected: {}, Predicted: {}"
