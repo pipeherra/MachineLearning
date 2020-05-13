@@ -76,8 +76,26 @@ for i in range(len(data_array)):
 
 perceptron.train_weight(training_data_array, True)
 
+true_positives = 0
+true_negatives = 0
+false_positives = 0
+false_negatives = 0
 for prediction_data in prediction_data_array:
-    print("Predicting: Expected: {}, Predicted: {}"
-          .format(prediction_data.expected, perceptron.predict(prediction_data.inputs)))
+    prediction = perceptron.predict(prediction_data.inputs)
+    if prediction_data.expected == 1.0:
+        if prediction == 1.0:
+            true_positives += 1
+        else:
+            false_negatives += 1
+    else:
+        if prediction == 1.0:
+            false_positives += 1
+        else:
+            true_negatives += 1
+    # print("Predicting: Expected: {}, Predicted: {}".format(prediction_data.expected, prediction))
+print("True-Positives: {}, True-Negatives: {}, False-Positives: {}, True-Negatives: {}"
+      .format(true_positives, true_negatives, false_positives, false_negatives))
+print("Error-Rate: {}, Success-Rate: {}".format((false_positives + false_negatives) / len(prediction_data_array),
+                                                (true_positives + true_negatives) / len(prediction_data_array)))
 plt.legend()
 plt.show()
