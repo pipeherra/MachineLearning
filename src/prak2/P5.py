@@ -3,10 +3,10 @@ import random
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from algorithmen.training_data import TrainingData
-from algorithmen.perceptron import Perceptron
-from misc.sensor import Sensor
-from prak2.P5_data import P5Data
+from src.algorithmen.training_data import TrainingData
+from src.algorithmen.perceptron import Perceptron
+from src.misc.sensor import Sensor
+from src.prak2.P5_data import P5Data
 from src.signals.statistics import Statistics
 
 threshold = 0.5
@@ -93,7 +93,7 @@ for prediction_data in prediction_data_array:
         else:
             true_negatives += 1
     # print("Predicting: Expected: {}, Predicted: {}".format(prediction_data.expected, prediction))
-print("True-Positives: {}, True-Negatives: {}, False-Positives: {}, True-Negatives: {}"
+print("True-Positives: {}, True-Negatives: {}, False-Positives: {}, False-Negatives: {}"
       .format(true_positives, true_negatives, false_positives, false_negatives))
 print("Error-Rate: {}, Success-Rate: {}".format((false_positives + false_negatives) / len(prediction_data_array),
                                                 (true_positives + true_negatives) / len(prediction_data_array)))
