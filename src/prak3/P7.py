@@ -54,7 +54,7 @@ for i in range(window_count):
 
 
 k = 3
-nearest_neighbours = nn.nearest_neighbour(k, 'euclidean')
+nearest_neighbours = nn.NearestNeighbour(k, 'euclidean')
 
 teach_ratio = 0.4
 teach_train_limit = int(np.round(teach_ratio * len(data_array)))
@@ -68,8 +68,8 @@ for x in range(0, teach_train_limit):
 # Test
 for x in range(teach_train_limit, len(data_array)):
     data = data_array[x]
-    nearest_neighbours.test_data(data.gehen_features, 1)
-    nearest_neighbours.test_data(data.ruhe_features, 0)
+    nearest_neighbours.predict_data(data.gehen_features, 1)
+    nearest_neighbours.predict_data(data.ruhe_features, 0)
 
 
 # for i in range(len(data_array)):

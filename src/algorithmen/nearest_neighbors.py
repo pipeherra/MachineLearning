@@ -1,39 +1,9 @@
-import numpy as np
+from typing import List
+
 from src.algorithmen.metric import get_distance
 
 
-def k_nearest_neighbours(data, inputs, metric_name, k):
-    neighbours = []
-    distance_k = 0
-    for x in data:
-        distance = get_distance(inputs, x[0:len(x) - 2], metric_name)
-        if len(neighbours) < k:
-            neighbours += [[x, distance]]
-            distance_k = max(distance_k, distance)
-        elif distance < distance_k:
-            for y in neighbours:
-                if y[1] >= distance_k:
-                    neighbours.remove(y)
-                    break
-            neighbours += [[x, distance]]
-            distance_k = distance
-            for y in neighbours:
-                distance_k = max(distance_k, y[1])
-    class_1 = 0
-    class_0 = 0
-    for x in neighbours:
-        if x[0][len(x[0]) - 2] == 1:
-            class_1 += 1
-        else:
-            class_0 += 1
-    if class_1 > class_0:
-        result = 1
-    else:
-        result = 0
-    return result
-
-
-class object:
+class RateObject:
     def __init__(self):
         self.testedData = 0
         self.truePosData = 0
@@ -57,27 +27,58 @@ class object:
         return (self.falseNegData + self.falsePosData) / self.testedData
 
 
-class nearest_neighbour(object):
+class Neighbour:
+    def __init__(self, features, clazz):
+        self.features = features
+        self.clazz = clazz
+        self.distance = 0
+
+    def calc_distance(self, to, metric_name):
+        self.distance = get_distance(self.features, to, metric_name)
+
+
+class NearestNeighbour(RateObject):
+    known_data_array: List[Neighbour]
+
     def __init__(self, k, metric_name):
-        object.__init__(self)
+        RateObject.__init__(self)
         self.metric_name = metric_name
         self.k = k
-        self.data = []
+        self.known_data_array = []
 
-    def train_data(self, input, result):
-        self.data += [[input, result]]
+    def train_data(self, data, clazz):
+        self.known_data_array.append(Neighbour(data, clazz))
 
-    def test_data(self, inputs, result):
-        neighbour_result = k_nearest_neighbours(self.data, inputs, self.metric_name, self.k)
+    def get_nearest_neighbours(self):
+        for known_data in self.known_data_array:
+            known_data.calc_distance()
+
+    def predict_data(self, inputs, expected):
+        for known_data in self.known_data_array:
+            known_data.calc_distance(inputs, self.metric_name)
+        self.known_data_array.sort(key=lambda x: x.distance)
+        positives = 0
+        negatives = 0
+        if self.k > len(self.known_data_array):
+            self.k = len(self.known_data_array)
+        for i in range(self.k):
+            if self.known_data_array[i].clazz == 1:
+                positives += 1
+            else:
+                negatives += 1
+        if positives > negatives:
+            predicted = 1
+        else:
+            predicted = 0
 
         self.testedData += 1
-        if result == 1:
-            if np.round(neighbour_result) == 1:
+        if expected == 1:
+            if predicted == 1:
                 self.truePosData += 1
             else:
                 self.falseNegData += 1
         else:
-            if np.round(neighbour_result) == 0:
+            if predicted == 0:
                 self.trueNegData += 1
             else:
                 self.falsePosData += 1

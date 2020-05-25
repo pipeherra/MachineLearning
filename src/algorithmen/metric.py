@@ -1,6 +1,8 @@
 
 
 def get_distance(args1, args2, metric_name):
+    if len(args1) != len(args2):
+        raise AttributeError("Len of args1 and args2 is unequal! args1={}, args2={}".format(len(args1), len(args2)))
     distance = 0
     if metric_name == 'chessboard':
         for i in range(0, len(args1)):
