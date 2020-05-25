@@ -1,6 +1,7 @@
 from typing import List
 
 from src.algorithmen.metric import get_distance
+import numpy as np
 
 
 class RateObject:
@@ -10,6 +11,8 @@ class RateObject:
         self.trueNegData = 0
         self.falsePosData = 0
         self.falseNegData = 0
+        self.correctClassifications = 0
+        self.wrongClassifications = 0
 
     def get_tp_ratio(self):
         return self.truePosData / (self.truePosData + self.falseNegData)
@@ -24,7 +27,7 @@ class RateObject:
         return self.falseNegData / (self.falseNegData + self.truePosData)
 
     def get_f_ratio(self):
-        return (self.falseNegData + self.falsePosData) / self.testedData
+        return self.wrongClassifications / self.testedData
 
 
 class Neighbour:
@@ -40,11 +43,14 @@ class Neighbour:
 class NearestNeighbour(RateObject):
     known_data_array: List[Neighbour]
 
-    def __init__(self, k, metric_name):
+    def __init__(self, k, metric_name, classes=None):
         RateObject.__init__(self)
+        if classes is None:
+            classes = [0.0, 1.0]
         self.metric_name = metric_name
         self.k = k
         self.known_data_array = []
+        self.classes = classes
 
     def train_data(self, data, clazz):
         self.known_data_array.append(Neighbour(data, clazz))
@@ -57,28 +63,30 @@ class NearestNeighbour(RateObject):
         for known_data in self.known_data_array:
             known_data.calc_distance(inputs, self.metric_name)
         self.known_data_array.sort(key=lambda x: x.distance)
-        positives = 0
-        negatives = 0
+        class_counts = np.zeros(len(self.classes))
         if self.k > len(self.known_data_array):
             self.k = len(self.known_data_array)
-        for i in range(self.k):
-            if self.known_data_array[i].clazz == 1:
-                positives += 1
-            else:
-                negatives += 1
-        if positives > negatives:
-            predicted = 1
-        else:
-            predicted = 0
+        for data_index in range(self.k):
+            for class_index in range(len(self.classes)):
+                if self.known_data_array[data_index].clazz == self.classes[class_index]:
+                    class_counts[class_index] += 1
+                    break
+        predicted = self.classes[class_counts.argmax()]
 
         self.testedData += 1
-        if expected == 1:
-            if predicted == 1:
-                self.truePosData += 1
-            else:
-                self.falseNegData += 1
+        if predicted == expected:
+            self.correctClassifications += 1
         else:
-            if predicted == 0:
-                self.trueNegData += 1
+            self.wrongClassifications += 1
+        if len(self.classes) == 2:
+            if predicted == self.classes[0]:
+                if expected == self.classes[0]:
+                    self.trueNegData += 1
+                else:
+                    self.falseNegData += 1
             else:
-                self.falsePosData += 1
+                if expected == self.classes[1]:
+                    self.truePosData += 1
+                else:
+                    self.falsePosData += 1
+        return predicted

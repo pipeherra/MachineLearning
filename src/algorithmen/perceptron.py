@@ -62,7 +62,7 @@ class Perceptron:
                     last_wrong_predictions = wrong_predictions
                     print("Updated Weights: Data_Count: {}, Wrong_Predictions: {}, Error-Rate: {}, Total-Updates: {}"
                           .format(len(training_data_array), wrong_predictions,
-                                  wrong_predictions/len(training_data_array), updates))
+                                  wrong_predictions / len(training_data_array), updates))
                 else:
                     print("Discarded Weights: Data_Count: {}, Wrong_Predictions: {}, Error-Rate: {}, Total-Updates: {}"
                           .format(len(training_data_array), wrong_predictions,
@@ -71,7 +71,6 @@ class Perceptron:
                 print("Data_Count: {}, Wrong_Predictions: {}, Error-Rate: {}, Total-Updates: {}"
                       .format(len(training_data_array), wrong_predictions,
                               wrong_predictions / len(training_data_array), updates))
-
 
     @staticmethod
     def normalized_tanh(data_sum):
@@ -88,4 +87,3 @@ class Perceptron:
         initial_weights = np.zeros(features + 1)
         initial_weights[0] = threshold
         return Perceptron(Perceptron.signum, initial_weights, learning_rate)
-
