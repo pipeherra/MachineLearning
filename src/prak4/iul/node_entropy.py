@@ -16,14 +16,14 @@ for classification in classifications:
     features = classification['input']
     instances_per_class[clazz] = instances_per_class.get(clazz, 0) + 1
 
-probabilities = dict()
-for clazz in instances_per_class.keys():
-    probabilities[clazz] = instances_per_class[clazz] / instances_total
-
 entropy = 0.0
-for probability in probabilities.values():
+for clazz in instances_per_class.keys():
+    probability = instances_per_class[clazz] / instances_total
     if 0.0 < probability < 1.0:
-        entropy -= probability * math.log(probability)
+        temp_entropy = probability * math.log(probability)
+        entropy -= temp_entropy
+    else:
+        print("probability wrong: {}".format(probability))
 
 print(instances_total)
 print(instances_per_class)
