@@ -77,11 +77,15 @@ for x in range(0, teach_train_limit):
     nearest_neighbours.train_data(data.huepfen_features, 3)
 
 # Test
+detected = [1, 2, 3]
 for x in range(teach_train_limit, len(data_array)):
     data = data_array[x]
-    nearest_neighbours.predict_data(data.gehen_features, 1)
-    nearest_neighbours.predict_data(data.ruhe_features, 2)
-    nearest_neighbours.predict_data(data.huepfen_features, 3)
+    if nearest_neighbours.predict_data(data.gehen_features, 1) != 1:
+        print("wrong detection gehen")
+    if nearest_neighbours.predict_data(data.ruhe_features, 2) != 2:
+        print("wrong detection ruhe")
+    if nearest_neighbours.predict_data(data.huepfen_features, 3) != 3:
+        print("wrong detection huepfen")
 
 
 # Print out
