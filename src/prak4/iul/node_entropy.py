@@ -1,5 +1,6 @@
 from src.iul.iul import IUL
 import math
+import numpy as np
 
 iul = IUL(False)
 exercise_id = "node_entropy"
@@ -8,20 +9,21 @@ request_data = iul.get_data(exercise_id)
 test_id = request_data['session']
 classifications = request_data['data']
 
-instances_total = len(classifications)
+instances_total = 0 #len(classifications)
 instances_per_class = dict()
 
 for classification in classifications:
     clazz = classification['class']
     features = classification['input']
     instances_per_class[clazz] = instances_per_class.get(clazz, 0) + 1
+    instances_total += 1
 
 entropy = 0.0
 for clazz in instances_per_class.keys():
     probability = instances_per_class[clazz] / instances_total
-    if 0.0 < probability < 1.0:
-        temp_entropy = probability * math.log(probability)
-        entropy -= temp_entropy
+    if probability != 0:
+        temp_entropy = -probability * np.log(probability)
+        entropy += temp_entropy
     else:
         print("probability wrong: {}".format(probability))
 
