@@ -2,7 +2,7 @@ from typing import List
 
 from algorithms.classification import Classification
 from algorithms.data_point import DataPoint
-from algorithms.decision_tree import DecisionTree
+from algorithms.decision_tree.leaf import Leaf
 from src.iul.iul import IUL
 
 iul = IUL(False)
@@ -22,8 +22,8 @@ for data in data_array:
         classifications.append(current_class)
     inputs.append(DataPoint(data['input'], current_class))
 
-decision_tree = DecisionTree(classifications)
-entropy = decision_tree.get_entropy(inputs)
+leaf = Leaf(inputs)
+entropy = leaf.get_entropy()
 
 print(entropy)
 

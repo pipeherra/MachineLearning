@@ -10,7 +10,7 @@ class Classification:
         return other.value != self.value
 
     def __hash__(self):
-        return self.value
+        return self.value.__hash__()
 
     @staticmethod
     def get_true_false():

@@ -6,9 +6,7 @@ import matplotlib.pyplot as plt
 
 from algorithms.classification import Classification
 from algorithms.data_point import DataPoint
-from algorithms.decision_tree import DecisionTree
-from algorithms.metrics.euclidean import Euclidean
-from algorithms.nearest_neighbors import NearestNeighbour
+from algorithms.decision_tree.decision_tree import DecisionTree
 from src.misc.sensor import Sensor
 from src.prak3.P7_data import P7Data
 from src.signals.statistics import Statistics
@@ -59,8 +57,9 @@ for i in range(window_count):
     data_array.append(P7Data(i, start, end, ruhe_features, gehen_features))
 
 
-k = 3
-decision_tree = DecisionTree([ruhe_classification, gehen_classification], 0.1)
+theta = 0.1
+window_count = 5
+decision_tree = DecisionTree([ruhe_classification, gehen_classification], theta, window_count)
 
 teach_ratio = 0.4
 teach_train_limit = int(np.round(teach_ratio * len(data_array)))
@@ -74,10 +73,12 @@ for x in range(0, teach_train_limit):
 decision_tree.train_data(train_data)
 
 # Test
-for x in range(teach_train_limit, len(data_array)):
-    data = data_array[x]
-    decision_tree.predict_data(DataPoint(data.gehen_features, gehen_classification))
-    decision_tree.predict_data(DataPoint(data.ruhe_features, ruhe_classification))
+#for x in range(teach_train_limit, len(data_array)):
+#    data = data_array[x]
+#    decision_tree.predict_data(DataPoint(data.gehen_features, gehen_classification))
+#    decision_tree.predict_data(DataPoint(data.ruhe_features, ruhe_classification))
 
 print("\n>>> NEAREST NEIGHBOURS <<<\n")
 decision_tree.print_statistics()
+print("\n")
+decision_tree.print_tree()
