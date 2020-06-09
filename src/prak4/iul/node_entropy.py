@@ -8,13 +8,14 @@ request_data = iul.get_data(exercise_id)
 test_id = request_data['session']
 classifications = request_data['data']
 
-instances_total = len(classifications)
+instances_total = 0 #len(classifications)
 instances_per_class = dict()
 
 for classification in classifications:
     clazz = classification['class']
     features = classification['input']
     instances_per_class[clazz] = instances_per_class.get(clazz, 0) + 1
+    instances_total += 1
 
 entropy = 0.0
 for clazz in instances_per_class.keys():
