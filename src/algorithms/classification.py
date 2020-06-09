@@ -9,6 +9,9 @@ class Classification:
     def __ne__(self, other):
         return other.value != self.value
 
+    def __hash__(self):
+        return self.value
+
     @staticmethod
     def get_true_false():
         return [Classification(0.0, "False"), Classification(1.0, "True")]

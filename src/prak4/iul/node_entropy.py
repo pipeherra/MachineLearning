@@ -1,33 +1,30 @@
+from typing import List
+
+from algorithms.classification import Classification
+from algorithms.data_point import DataPoint
+from algorithms.decision_tree import DecisionTree
 from src.iul.iul import IUL
-import math
 
 iul = IUL(False)
 exercise_id = "node_entropy"
 request_data = iul.get_data(exercise_id)
 
 test_id = request_data['session']
-classifications = request_data['data']
+data_array = request_data['data']
 
-instances_total = 0 #len(classifications)
-instances_per_class = dict()
+classifications: List[Classification] = []
+inputs: List[DataPoint] = []
 
-for classification in classifications:
-    clazz = classification['class']
-    features = classification['input']
-    instances_per_class[clazz] = instances_per_class.get(clazz, 0) + 1
-    instances_total += 1
+for data in data_array:
+    clazz = data['class']
+    current_class = Classification(clazz, "unknown")
+    if current_class not in classifications:
+        classifications.append(current_class)
+    inputs.append(DataPoint(data['input'], current_class))
 
-entropy = 0.0
-for clazz in instances_per_class.keys():
-    probability = instances_per_class[clazz] / instances_total
-    if 0.0 < probability <= 1.0:
-        temp_entropy = probability * math.log(probability)
-        entropy -= temp_entropy
-    else:
-        print("probability wrong: {}".format(probability))
+decision_tree = DecisionTree(classifications)
+entropy = decision_tree.get_entropy(inputs)
 
-print(instances_total)
-print(instances_per_class)
 print(entropy)
 
 result_data = {'session': test_id,
