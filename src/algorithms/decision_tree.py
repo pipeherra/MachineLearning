@@ -1,6 +1,7 @@
 import math
 from typing import List
 import numpy as np
+from sklearn.tree import DecisionTreeClassifier
 
 from algorithms.algorithm import Algorithm
 from algorithms.classification import Classification
@@ -9,14 +10,25 @@ from algorithms.data_point import DataPoint
 
 class DecisionTree(Algorithm):
 
-    def __init__(self, classifications: List[Classification]):
+    def __init__(self, classifications: List[Classification], theta):
         super().__init__(classifications)
+        self.theta = theta
+        self.tree = DecisionTreeClassifier(criterion='entropy')
 
     def train_data(self, data_array: List[DataPoint]):
-        pass
+        feature_list = []
+        classes_list = []
+        for data_input in data_array:
+            feature_list.append(data_input.features)
+            classes_list.append(data_input.class_expected.value)
+        self.tree.fit(feature_list, classes_list)
 
     def predict_data(self, data_point: DataPoint) -> Classification:
-        pass
+        prediction_array = self.tree.predict([data_point.features])
+        prediction_value = prediction_array[0]
+        prediction_class = self.to_classification(prediction_value)
+        self.update_rates(data_point.class_expected, prediction_class)
+        return prediction_class
 
     def get_entropy(self, data_array: List[DataPoint]) -> float:
         instances_per_class = np.zeros(self.classes_len)
