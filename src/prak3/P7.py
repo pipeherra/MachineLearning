@@ -1,9 +1,14 @@
-import src.algorithmen.nearest_neighbors as nn
+from typing import List, Any
+
 import numpy as np
 from statistics import *
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from algorithms.classification import Classification
+from algorithms.data_point import DataPoint
+from algorithms.metrics.euclidean import Euclidean
+from algorithms.nearest_neighbors import NearestNeighbour
 from src.misc.sensor import Sensor
 from src.prak3.P7_data import P7Data
 from src.signals.statistics import Statistics
@@ -19,6 +24,9 @@ gehen_data['Timestamp_normalized'] = Statistics.get_timestamps_normalized(gehen_
 gehen_data = gehen_data[gehen_data.Timestamp_normalized < 22000]
 ruhe_data['Timestamp_normalized'] = Statistics.get_timestamps_normalized(ruhe_data['Timestamp'])
 ruhe_data = ruhe_data[ruhe_data.Timestamp_normalized < 22000]
+
+ruhe_classification = Classification(0.0, "Ruhe")
+gehen_classification = Classification(1.0, "Gehen")
 
 plt.figure(figsize=(20, 10))
 plt.scatter(ruhe_data['Timestamp_normalized'], ruhe_data['accelX (m/s^2)'], label='ruhe')
@@ -52,49 +60,24 @@ for i in range(window_count):
 
 
 k = 3
-nearest_neighbours = nn.NearestNeighbour(k, 'euclidean')
+nearest_neighbours = NearestNeighbour(k, Euclidean(), [ruhe_classification, gehen_classification])
 
 teach_ratio = 0.4
 teach_train_limit = int(np.round(teach_ratio * len(data_array)))
 
 # Train
+train_data: List[DataPoint] = []
 for x in range(0, teach_train_limit):
     data = data_array[x]
-    nearest_neighbours.train_data(data.gehen_features, 1)
-    nearest_neighbours.train_data(data.ruhe_features, 0)
+    train_data.append(DataPoint(data.gehen_features, gehen_classification))
+    train_data.append(DataPoint(data.ruhe_features, ruhe_classification))
+nearest_neighbours.train_data(train_data)
 
 # Test
 for x in range(teach_train_limit, len(data_array)):
     data = data_array[x]
-    nearest_neighbours.predict_data(data.gehen_features, 1)
-    nearest_neighbours.predict_data(data.ruhe_features, 0)
+    nearest_neighbours.predict_data(DataPoint(data.gehen_features, gehen_classification))
+    nearest_neighbours.predict_data(DataPoint(data.ruhe_features, ruhe_classification))
 
-
-# for i in range(len(data_array)):
-#     data = data_array[i]
-#     if i == 0:
-#         plt.hlines(data.gehen_features[1], data.start, data.end, colors='orange', label='Stddev-Gehen')
-#         plt.hlines(data.ruhe_features[1], data.start, data.end, colors='silver', label='Stddev-Ruhe')
-#     else:
-#         plt.hlines(data.gehen_features[1], data.start, data.end, colors='orange')
-#         plt.hlines(data.ruhe_features[1], data.start, data.end, colors='silver')
-#     if i < int(window_count * 2 / 3):
-#         nearest_neighbours.train_data(data.ruhe_features, 0.0)
-#         nearest_neighbours.train_data(data.gehen_features, 1.0)
-#     else:
-#         nearest_neighbours.test_data(data.ruhe_features, 0.0)
-#         nearest_neighbours.test_data(data.gehen_features, 1.0)
-
-# Print out
 print("\n>>> NEAREST NEIGHBOURS <<<\n")
-print("Tested Data: " + str(nearest_neighbours.testedData))
-print("True Positive Data: " + str(nearest_neighbours.truePosData))
-print("True Negative Data: " + str(nearest_neighbours.trueNegData))
-print("False Positive Data: " + str(nearest_neighbours.falsePosData))
-print("False Negative Data: " + str(nearest_neighbours.falseNegData))
-
-print("Fehler Rate: " + str(nearest_neighbours.get_f_ratio()))
-print("True Positive Rate: " + str(nearest_neighbours.get_tp_ratio()))
-print("True Negative Rate: " + str(nearest_neighbours.get_tn_ratio()))
-print("False Positive Rate: " + str(nearest_neighbours.get_fp_ratio()))
-print("False Negative Rate: " + str(nearest_neighbours.get_fn_ratio()))
+nearest_neighbours.print_statistics()

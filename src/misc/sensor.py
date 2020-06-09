@@ -1,7 +1,7 @@
 
 class Sensor:
-    def __init__(self, id, name):
-        self.id = id
+    def __init__(self, _id, name):
+        self.id = _id
         self.name = name
 
     @staticmethod

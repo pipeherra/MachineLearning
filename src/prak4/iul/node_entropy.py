@@ -19,7 +19,7 @@ for classification in classifications:
 entropy = 0.0
 for clazz in instances_per_class.keys():
     probability = instances_per_class[clazz] / instances_total
-    if 0.0 < probability < 1.0:
+    if 0.0 < probability <= 1.0:
         temp_entropy = probability * math.log(probability)
         entropy -= temp_entropy
     else:

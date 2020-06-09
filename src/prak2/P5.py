@@ -1,10 +1,14 @@
 import random
+from typing import List, Any
 
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 
-from src.algorithmen.training_data import TrainingData
-from src.algorithmen.perceptron import Perceptron
+from algorithms.classification import Classification
+from algorithms.data_point import DataPoint
+from algorithms.perceptron import Perceptron
+from algorithms.transfers.signum import Signum
 from src.misc.sensor import Sensor
 from src.prak2.P5_data import P5Data
 from src.signals.statistics import Statistics
@@ -53,11 +57,19 @@ for i in range(window_count):
             ruhe_features.append(Statistics.get_standard_deviation(ruhe_sensor['accelX (m/s^2)']))
     data_array.append(P5Data(i, start, end, ruhe_features, gehen_features))
 
-perceptron = Perceptron.get_perceptron(threshold, features, 0.1)
+
+initial_weights = np.zeros(features + 1)
+initial_weights[0] = threshold
+
+classification_gehen = Classification(0.0, "Gehen")
+classification_ruhe = Classification(1.0, "Ruhe")
+classifications = [classification_gehen, classification_gehen]
+
+perceptron = Perceptron(classifications, initial_weights, Signum(), pocket=False, learning_rate=0.1)
 random.shuffle(data_array)
 
-training_data_array = []
-prediction_data_array = []
+training_data_array: List[DataPoint] = []
+prediction_data_array: List[DataPoint] = []
 
 for i in range(len(data_array)):
     data = data_array[i]
@@ -68,27 +80,27 @@ for i in range(len(data_array)):
         plt.hlines(data.gehen_features[1], data.start, data.end, colors='orange')
         plt.hlines(data.ruhe_features[1], data.start, data.end, colors='silver')
     if i < int(window_count * 2 / 3):
-        training_data_array.append(TrainingData(data.ruhe_features, 0.0))
-        training_data_array.append(TrainingData(data.gehen_features, 1.0))
+        training_data_array.append(DataPoint(data.ruhe_features, classification_ruhe))
+        training_data_array.append(DataPoint(data.gehen_features, classification_gehen))
     else:
-        prediction_data_array.append(TrainingData(data.ruhe_features, 0.0))
-        prediction_data_array.append(TrainingData(data.gehen_features, 1.0))
+        prediction_data_array.append(DataPoint(data.ruhe_features, classification_ruhe))
+        prediction_data_array.append(DataPoint(data.gehen_features, classification_gehen))
 
-perceptron.train_weight(training_data_array, True)
+perceptron.train_data(training_data_array)
 
 true_positives = 0
 true_negatives = 0
 false_positives = 0
 false_negatives = 0
 for prediction_data in prediction_data_array:
-    prediction = perceptron.predict(prediction_data.inputs)
-    if prediction_data.expected == 1.0:
-        if prediction == 1.0:
+    prediction = perceptron.predict_data(prediction_data)
+    if prediction_data.class_expected == classification_ruhe:
+        if prediction == classification_ruhe:
             true_positives += 1
         else:
             false_negatives += 1
     else:
-        if prediction == 1.0:
+        if prediction == classification_ruhe:
             false_positives += 1
         else:
             true_negatives += 1

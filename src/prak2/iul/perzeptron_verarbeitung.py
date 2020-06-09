@@ -1,4 +1,7 @@
-from algorithmen.perceptron import Perceptron
+from algorithms.classification import Classification
+from algorithms.data_point import DataPoint
+from algorithms.perceptron import Perceptron
+from algorithms.transfers.tanh import Tanh
 from src.iul.iul import IUL
 
 iul = IUL(False)
@@ -15,12 +18,13 @@ for data in data_array:
     data_weights = data["weights"]
     data_inputs = data["input"]
     data_inputs.insert(0, 1.0)
-    perceptron = Perceptron(Perceptron.normalized_tanh, data_weights)
-    data_value = perceptron.predict(data_inputs)
+
+    perceptron = Perceptron(Classification.get_true_false(), data_weights, Tanh())
+    prediction = perceptron.predict_data(DataPoint(data_inputs, Classification(0.0, "False")))
 
     data_result = {
         'id': data_id,
-        'value': data_value
+        'value': prediction.value
     }
     results.append(data_result)
 

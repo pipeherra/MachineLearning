@@ -1,5 +1,7 @@
-from algorithmen.training_data import TrainingData
-from algorithmen.perceptron import Perceptron
+from algorithms.classification import Classification
+from algorithms.data_point import DataPoint
+from algorithms.perceptron import Perceptron
+from algorithms.transfers.tanh import Tanh
 from src.iul.iul import IUL
 
 iul = IUL(False)
@@ -12,7 +14,7 @@ learning_rate = request_data["learning-rate"]
 initial_weights = request_data["initial-weights"]
 training_data_array = request_data["training-data"]
 
-perceptron = Perceptron(Perceptron.normalized_tanh, initial_weights, learning_rate)
+perceptron = Perceptron(Classification.get_true_false(), initial_weights, Tanh(), learning_rate=learning_rate)
 
 results = []
 for training_data in training_data_array:
@@ -20,7 +22,7 @@ for training_data in training_data_array:
     data_inputs = training_data["input"]
     data_inputs.insert(0, 1.0)
     data_expected = training_data['class']
-    result_weights = perceptron.update_weights(TrainingData(data_inputs, data_expected))
+    result_weights = perceptron.update_weights(DataPoint(data_inputs, Classification(data_expected, "unknown")))
     data_result = {
         'id': data_id,
         'weights': result_weights.copy()

@@ -1,9 +1,11 @@
-import src.algorithmen.nearest_neighbors as nn
 import numpy as np
-from statistics import *
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from algorithms.classification import Classification
+from algorithms.data_point import DataPoint
+from algorithms.metrics.euclidean import Euclidean
+from algorithms.nearest_neighbors import NearestNeighbour
 from src.misc.sensor import Sensor
 from src.prak3.P8_data import P8Data
 from src.signals.statistics import Statistics
@@ -25,6 +27,10 @@ ruhe_data = ruhe_data[ruhe_data.Timestamp_normalized < 12000]
 
 huepfen_data['Timestamp_normalized'] = Statistics.get_timestamps_normalized(huepfen_data['Timestamp'])
 huepfen_data = huepfen_data[huepfen_data.Timestamp_normalized < 12000]
+
+gehen_classification = Classification(1.0, "Gehen")
+ruhe_classification = Classification(2.0, "Ruhe")
+huepfen_classification = Classification(3.0, "Huepfen")
 
 plt.figure(figsize=(20, 10))
 plt.scatter(ruhe_data['Timestamp_normalized'], ruhe_data['accelX (m/s^2)'], label='ruhe')
@@ -64,35 +70,36 @@ for i in range(window_count):
 
 
 k = 3
-nearest_neighbours = nn.NearestNeighbour(k, 'euclidean', [1, 2, 3])
+nearest_neighbours = NearestNeighbour(k, Euclidean(), [gehen_classification, ruhe_classification, huepfen_classification])
 
 teach_ratio = 0.4
 teach_train_limit = int(np.round(teach_ratio * len(data_array)))
 
+train_data = []
 # Train
 for x in range(0, teach_train_limit):
     data = data_array[x]
-    nearest_neighbours.train_data(data.gehen_features, 1)
-    nearest_neighbours.train_data(data.ruhe_features, 2)
-    nearest_neighbours.train_data(data.huepfen_features, 3)
+    train_data.append(DataPoint(data.gehen_features, gehen_classification))
+    train_data.append(DataPoint(data.ruhe_features, ruhe_classification))
+    train_data.append(DataPoint(data.huepfen_features, huepfen_classification))
+
+nearest_neighbours.train_data(train_data)
 
 # Test
 detected = [1, 2, 3]
 for x in range(teach_train_limit, len(data_array)):
     data = data_array[x]
-    if nearest_neighbours.predict_data(data.gehen_features, 1) != 1:
+    if nearest_neighbours.predict_data(DataPoint(data.gehen_features, gehen_classification)) != gehen_classification:
         print("wrong detection gehen")
-    if nearest_neighbours.predict_data(data.ruhe_features, 2) != 2:
+    if nearest_neighbours.predict_data(DataPoint(data.ruhe_features, ruhe_classification)) != ruhe_classification:
         print("wrong detection ruhe")
-    if nearest_neighbours.predict_data(data.huepfen_features, 3) != 3:
+    if nearest_neighbours.predict_data(DataPoint(data.huepfen_features, huepfen_classification)) != huepfen_classification:
         print("wrong detection huepfen")
 
 
 # Print out
 print("\n>>> NEAREST NEIGHBOURS <<<\n")
-print("Tested Data: " + str(nearest_neighbours.testedData))
-print("Correct Classifications: " + str(nearest_neighbours.correctClassifications))
-print("Wrong Classifications: " + str(nearest_neighbours.wrongClassifications))
+nearest_neighbours.print_statistics()
 
 #plt.legend()
 #plt.show()
