@@ -1,5 +1,6 @@
 from src.iul.iul import IUL
-from src.signals.statistics import Statistics
+
+from stats.statistic import Statistic
 
 iul = IUL(False)
 exercise_id = "mean"
@@ -14,7 +15,7 @@ for data_signal in data_signals:
     signal_values = data_signal["values"]
     signal_result = {
         'id': signal_id,
-        'mean': Statistics.get_mean(signal_values)
+        'mean': Statistic.get_mean(signal_values)
     }
     signal_results.append(signal_result)
 result = {

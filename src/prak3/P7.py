@@ -1,13 +1,12 @@
-from typing import List, Any
+from typing import List
 
 import numpy as np
-from statistics import *
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from algorithms.classification import Classification
-from algorithms.data_point import DataPoint
-from algorithms.metrics.euclidean import Euclidean
+from misc.classification import Classification
+from misc.data_point import DataPoint
+from metrics.euclidean import Euclidean
 from algorithms.nearest_neighbors import NearestNeighbour
 from src.misc.sensor import Sensor
 from src.prak3.P7_data import P7Data

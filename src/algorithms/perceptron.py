@@ -1,19 +1,16 @@
-import math
-import random
-from abc import ABC, abstractmethod
 from typing import List
 
 import numpy as np
 
 from algorithms.algorithm import Algorithm
-from algorithms.classification import Classification
-from algorithms.data_point import DataPoint
+from misc.classification import Classification
+from misc.data_point import DataPoint
 from algorithms.transfers.transfer import Transfer
 
 
 class Perceptron(Algorithm):
     def __init__(self, classifications: List[Classification], initial_weights, transfer: Transfer,
-                 debug=False, pocket=False, learning_rate=0.0):
+                 debug=False, pocket=False, learning_rate=0.01, max_iterations=10000):
         if len(classifications) != 2:
             raise AttributeError("Perceptron is only able to differ two classes!")
         super().__init__(classifications)
@@ -22,13 +19,16 @@ class Perceptron(Algorithm):
         self.debug = debug
         self.pocket = pocket
         self.learning_rate = learning_rate
+        self.max_iterations = max_iterations
 
     def train_data(self, data_array: List[DataPoint]):
         updates = 0
         wrong_predictions = np.inf
         last_wrong_predictions = wrong_predictions
         weights = self.weights.copy()
-        while wrong_predictions != 0 and updates < 100000:
+        for i in range(len(data_array)):
+            data_array[i].features = [1.0] + data_array[i].features
+        while wrong_predictions != 0 and updates < self.max_iterations:
             wrong_predictions = 0
             for training_data in data_array:
                 prediction = self.test_weights(weights, training_data.features)
@@ -64,7 +64,7 @@ class Perceptron(Algorithm):
             self.weights = weights
 
     def predict_data(self, data_point: DataPoint) -> Classification:
-        prediction_value = self.test_weights(self.weights, data_point.features)
+        prediction_value = self.test_weights(self.weights, [1.0] + data_point.features)
         prediction_class = self.to_classification(prediction_value)
         self.update_rates(data_point.class_expected, prediction_class)
         return prediction_class

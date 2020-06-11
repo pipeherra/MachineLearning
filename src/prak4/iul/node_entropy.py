@@ -1,7 +1,7 @@
 from typing import List
 
-from algorithms.classification import Classification
-from algorithms.data_point import DataPoint
+from misc.classification import Classification
+from misc.data_point import DataPoint
 from algorithms.decision_tree.leaf import Leaf
 from src.iul.iul import IUL
 

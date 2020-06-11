@@ -1,6 +1,6 @@
 from typing import List
 
-from algorithms.classification import Classification
+from misc.classification import Classification
 
 
 class DataPoint:

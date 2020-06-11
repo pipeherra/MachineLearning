@@ -1,84 +1,80 @@
-from typing import List
+import random
 
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 
-from algorithms.classification import Classification
-from algorithms.data_point import DataPoint
-from algorithms.decision_tree.decision_tree import DecisionTree
+from algorithms.nearest_neighbors import NearestNeighbour
+from algorithms.perceptron import Perceptron
+from algorithms.transfers.signum import Signum
+from algorithms.transfers.tanh import Tanh
+from metrics.euclidean import Euclidean
+from misc.classification import Classification
+from misc.feature_config import FeatureConfig
+from signals.windowed_signal import WindowedSignal
 from src.misc.sensor import Sensor
-from src.prak3.P7_data import P7Data
-from src.signals.statistics import Statistics
-
-gehen_data = pd.read_csv('../../data/17SoSe/2017_Gruppe6_Appelfeller-Krupa/gehen.csv')
-# walking starts not directly. Need to move the series
-gehen_data = gehen_data[gehen_data.Timestamp >= (1492076265800 + 5000)]
-
-ruhe_data = pd.read_csv('../../data/17SoSe/2017_Gruppe6_Appelfeller-Krupa/ruhe.csv')
-
-# We do not need so many data -> clean up graphs
-gehen_data['Timestamp_normalized'] = Statistics.get_timestamps_normalized(gehen_data['Timestamp'])
-gehen_data = gehen_data[gehen_data.Timestamp_normalized < 22000]
-ruhe_data['Timestamp_normalized'] = Statistics.get_timestamps_normalized(ruhe_data['Timestamp'])
-ruhe_data = ruhe_data[ruhe_data.Timestamp_normalized < 22000]
+from stats.standard_deviation import StandardDeviation
 
 ruhe_classification = Classification(0.0, "Ruhe")
 gehen_classification = Classification(1.0, "Gehen")
+huepfen_classification = Classification(2.0, "Huepfen")
+drehen_classification = Classification(3.0, "Drehen")
+laufen_classification = Classification(4.0, "Laufen")
 
-plt.figure(figsize=(20, 10))
-plt.scatter(ruhe_data['Timestamp_normalized'], ruhe_data['accelX (m/s^2)'], label='ruhe')
-plt.scatter(gehen_data['Timestamp_normalized'], gehen_data['accelX (m/s^2)'], label='gehen')
+enabled_classifications = [
+    #ruhe_classification,
+    gehen_classification,
+    huepfen_classification,
+    #drehen_classification,
+    #laufen_classification,
+]
 
-data_array = []
-sensors = Sensor.get_sensors()
-features = 1 + len(sensors)
+window_size = 500  # timestamps
+window_moving = 200
+stddev = StandardDeviation()
+feature_configs = [FeatureConfig("accelX (m/s^2)", stddev, Sensor.get_sensor_ruecken()),
+                   FeatureConfig("accelX (m/s^2)", stddev, Sensor.get_sensor_oberschenkel()),
+                   FeatureConfig("accelX (m/s^2)", stddev, Sensor.get_sensor_unterschenkel()),
+                   FeatureConfig("accelX (m/s^2)", stddev, Sensor.get_sensor_oberarm()),
+                   FeatureConfig("accelX (m/s^2)", stddev, Sensor.get_sensor_unterarm())]
 
-window_size = 500 #timestamps
-moving_size = 200
-window_count = int(21000/moving_size)
+data_points = []
+if ruhe_classification in enabled_classifications:
+    ruhe_signal = WindowedSignal('../../data/17SoSe/2017_Gruppe6_Appelfeller-Krupa/ruhe.csv',
+                             ruhe_classification, 0, 0, window_size, window_moving)
+    data_points += ruhe_signal.get_data_points(feature_configs)
+if gehen_classification in enabled_classifications:
+    gehen_signal = WindowedSignal('../../data/17SoSe/2017_Gruppe6_Appelfeller-Krupa/gehen.csv',
+                              gehen_classification, 5000, 5000, window_size, window_moving)
+    data_points += gehen_signal.get_data_points(feature_configs)
+if huepfen_classification in enabled_classifications:
+    huepfen_signal = WindowedSignal('../../data/17SoSe/2017_Gruppe6_Appelfeller-Krupa/huepfen.csv',
+                                huepfen_classification, 3000, 4500, window_size, window_moving)
+    data_points += huepfen_signal.get_data_points(feature_configs)
+if drehen_classification in enabled_classifications:
+    drehen_signal = WindowedSignal('../../data/17SoSe/2017_Gruppe6_Appelfeller-Krupa/drehen.csv',
+                               drehen_classification, 4000, 4500, window_size, window_moving)
+    data_points += drehen_signal.get_data_points(feature_configs)
+if laufen_classification in enabled_classifications:
+    laufen_signal = WindowedSignal('../../data/17SoSe/2017_Gruppe6_Appelfeller-Krupa/laufen.csv',
+                               laufen_classification, 4000, 4000, window_size, window_moving)
+    data_points += laufen_signal.get_data_points(feature_configs)
 
-for i in range(window_count):
-    start = i * moving_size
-    end = i * moving_size + window_size
-    gehen_range = gehen_data[(gehen_data.Timestamp_normalized >= start)
-                             & (gehen_data.Timestamp_normalized <= end)]
-    ruhe_range = ruhe_data[(ruhe_data.Timestamp_normalized >= start) & (ruhe_data.Timestamp_normalized <= end)]
-    gehen_range_stddev = Statistics.get_standard_deviation(gehen_range['accelX (m/s^2)'])
-    ruhe_range_stddev = Statistics.get_standard_deviation(ruhe_range['accelX (m/s^2)'])
-    ruhe_features = [1.0, ruhe_range_stddev]
-    gehen_features = [1.0, gehen_range_stddev]
-    if features > 1:
-        for sensor in sensors:
-            ruhe_sensor = ruhe_range[ruhe_range['ID'] == sensor.id]
-            gehen_sensor = gehen_range[gehen_range['ID'] == sensor.id]
-            gehen_features.append(Statistics.get_standard_deviation(gehen_sensor['accelX (m/s^2)']))
-            ruhe_features.append(Statistics.get_standard_deviation(ruhe_sensor['accelX (m/s^2)']))
-    data_array.append(P7Data(i, start, end, ruhe_features, gehen_features))
-
-
-theta = 0.1
-window_count = 5
-decision_tree = DecisionTree([ruhe_classification, gehen_classification], theta, window_count)
+random.shuffle(data_points)
 
 teach_ratio = 0.4
-teach_train_limit = int(np.round(teach_ratio * len(data_array)))
+teach_train_limit = int(np.round(teach_ratio * len(data_points)))
 
-# Train
-train_data: List[DataPoint] = []
-for x in range(0, teach_train_limit):
-    data = data_array[x]
-    train_data.append(DataPoint(data.gehen_features, gehen_classification))
-    train_data.append(DataPoint(data.ruhe_features, ruhe_classification))
-decision_tree.train_data(train_data)
+train_data_points = data_points[:teach_train_limit]
+predict_data_points = data_points[teach_train_limit:]
 
-# Test
-#for x in range(teach_train_limit, len(data_array)):
-#    data = data_array[x]
-#    decision_tree.predict_data(DataPoint(data.gehen_features, gehen_classification))
-#    decision_tree.predict_data(DataPoint(data.ruhe_features, ruhe_classification))
+initial_weights = np.zeros(len(feature_configs) + 1)
+initial_weights[0] = 0.5
+algorithm = Perceptron(enabled_classifications, initial_weights, Signum(), True, False, 0.01, 10000)
+#algorithm = NearestNeighbour(3, Euclidean(), enabled_classifications)
+# algorithm = DecisionTree([ruhe_classification, gehen_classification], 0.1, )
 
-print("\n>>> NEAREST NEIGHBOURS <<<\n")
-decision_tree.print_statistics()
-print("\n")
-decision_tree.print_tree()
+algorithm.train_data(train_data_points)
+
+for predict_data_point in predict_data_points:
+    algorithm.predict_data(predict_data_point)
+
+algorithm.print_statistics()

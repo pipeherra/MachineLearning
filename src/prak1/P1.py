@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from src.signals.statistics import *
 
 # movements = ['walk', 'backwards_walk', 'steps', 'stand', 'run', 'jump', 'spin']
 

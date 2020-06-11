@@ -3,9 +3,9 @@ from typing import List
 import numpy as np
 
 from algorithms.algorithm import Algorithm
-from algorithms.classification import Classification
-from algorithms.data_point import DataPoint
-from algorithms.metrics.metric import Metric
+from misc.classification import Classification
+from misc.data_point import DataPoint
+from metrics.metric import Metric
 
 
 class Neighbour(DataPoint):

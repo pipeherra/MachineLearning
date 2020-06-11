@@ -1,17 +1,16 @@
 import random
-from typing import List, Any
+from typing import List
 
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-from algorithms.classification import Classification
-from algorithms.data_point import DataPoint
+from misc.classification import Classification
+from misc.data_point import DataPoint
 from algorithms.perceptron import Perceptron
 from algorithms.transfers.signum import Signum
 from src.misc.sensor import Sensor
 from src.prak2.P5_data import P5Data
-from src.signals.statistics import Statistics
 
 threshold = 0.5
 

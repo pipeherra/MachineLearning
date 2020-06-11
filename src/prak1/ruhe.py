@@ -1,7 +1,7 @@
 import pandas as pd
 
 from misc.sensor import Sensor
-from signals.statistics import Statistics
+from stats.statistic import Statistic
 
 data = pd.read_csv("../../data/17SoSe/2017_Gruppe6_Appelfeller-Krupa/ruhe.csv")
 sensors = Sensor.get_sensors()
@@ -17,6 +17,6 @@ for sensor in sensors:
             continue
         values = data_filtered[column]
         print("\t{}: Mittelwert: {}, Median: {}, Standardabweichung: {}"
-              .format(column, Statistics.get_mean(values),
-                      Statistics.get_median(values),
-                      Statistics.get_standard_deviation(values)))
+              .format(column, Statistic.get_mean(values),
+                      Statistic.get_median(values),
+                      Statistic.get_standard_deviation(values)))

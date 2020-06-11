@@ -1,7 +1,5 @@
-from typing import List
-
-from algorithms.data_point import DataPoint
-from algorithms.metrics.metric import Metric
+from misc.data_point import DataPoint
+from metrics.metric import Metric
 
 
 class Chessboard(Metric):

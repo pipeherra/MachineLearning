@@ -1,8 +1,8 @@
-from algorithms.classification import Classification
-from algorithms.data_point import DataPoint
-from algorithms.metrics.chessboard import Chessboard
-from algorithms.metrics.euclidean import Euclidean
-from algorithms.metrics.manhattan import Manhattan
+from misc.classification import Classification
+from misc.data_point import DataPoint
+from metrics.chessboard import Chessboard
+from metrics.euclidean import Euclidean
+from metrics.manhattan import Manhattan
 from src.iul.iul import IUL
 
 iul = IUL(False)

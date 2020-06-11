@@ -1,5 +1,5 @@
-from algorithms.classification import Classification
-from algorithms.data_point import DataPoint
+from misc.classification import Classification
+from misc.data_point import DataPoint
 from algorithms.perceptron import Perceptron
 from algorithms.transfers.tanh import Tanh
 from src.iul.iul import IUL

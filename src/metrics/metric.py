@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
-from typing import List
 
-from algorithms.data_point import DataPoint
+from misc.data_point import DataPoint
 
 
 class Metric(ABC):
