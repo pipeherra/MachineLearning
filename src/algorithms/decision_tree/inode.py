@@ -22,8 +22,14 @@ class Inode(Node):
         self.entropy = self.child_true.data_count / self.data_count * self.child_true.entropy
         self.entropy += self.child_false.data_count / self.data_count * self.child_false.entropy
 
-    def print_node(self) -> str:
-        return "Inode: Split-Index: {}, Split-Value: {}" \
-               "\n- True: {}" \
-               "\n- False: {}".format(self.split_index, self.split_value, self.child_true.print_node(),
-                                      self.child_false.print_node())
+    def print_node(self, level: int = 0) -> str:
+        spacer = " " * 2 * level
+        level += 1
+        return "{}Inode: Split-Index: {}, Split-Value: {}\n" \
+               "{}- True:\n" \
+               "{}\n" \
+               "{}- False:\n" \
+               "{}"\
+            .format(spacer, self.split_index, self.split_value,
+                    spacer, self.child_true.print_node(level),
+                    spacer, self.child_false.print_node(level))

@@ -39,8 +39,10 @@ class Leaf(Node):
                 print("probability wrong: {}".format(probability))
         self.entropy = entropy
 
-    def print_node(self) -> str:
-        return "Leaf: Data: {}, Entropy: {}, Class: {}".format(self.data_count, self.entropy, self.classification.name)
+    def print_node(self, level: int = 0) -> str:
+        spacer = " " * 2 * level
+        return "{}Leaf: Data: {}, Entropy: {}, Class: {}"\
+            .format(spacer, self.data_count, self.entropy, self.classification.name)
 
 
 

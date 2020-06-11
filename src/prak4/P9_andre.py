@@ -2,6 +2,7 @@ import random
 
 import numpy as np
 
+from algorithms.decision_tree.decision_tree import DecisionTree
 from algorithms.nearest_neighbors import NearestNeighbour
 from algorithms.perceptron import Perceptron
 from algorithms.transfers.signum import Signum
@@ -21,10 +22,10 @@ laufen_classification = Classification(4.0, "Laufen")
 
 enabled_classifications = [
     #ruhe_classification,
-    gehen_classification,
+    #gehen_classification,
     huepfen_classification,
     #drehen_classification,
-    #laufen_classification,
+    laufen_classification,
 ]
 
 window_size = 500  # timestamps
@@ -68,13 +69,15 @@ predict_data_points = data_points[teach_train_limit:]
 
 initial_weights = np.zeros(len(feature_configs) + 1)
 initial_weights[0] = 0.5
-algorithm = Perceptron(enabled_classifications, initial_weights, Signum(), True, False, 0.01, 10000)
+#algorithm = Perceptron(enabled_classifications, initial_weights, Signum(), True, False, 0.01, 10000)
 #algorithm = NearestNeighbour(3, Euclidean(), enabled_classifications)
-# algorithm = DecisionTree([ruhe_classification, gehen_classification], 0.1, )
+algorithm = DecisionTree([ruhe_classification, gehen_classification], 0.05, 10)
 
 algorithm.train_data(train_data_points)
 
-for predict_data_point in predict_data_points:
-    algorithm.predict_data(predict_data_point)
+#for predict_data_point in predict_data_points:
+#    algorithm.predict_data(predict_data_point)
 
-algorithm.print_statistics()
+#algorithm.print_statistics()
+algorithm.print_tree()
+print("done")

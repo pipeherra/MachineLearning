@@ -21,5 +21,5 @@ class Node(ABC):
         pass
 
     @abstractmethod
-    def print_node(self) -> str:
+    def print_node(self, level: int = 0) -> str:
         pass

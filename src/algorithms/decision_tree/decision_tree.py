@@ -22,13 +22,6 @@ class DecisionTree(Algorithm):
     def train_data(self, data_array: List[DataPoint]):
         self.root = Leaf(data_array)
         self.root = self.split_leaf(self.root)
-        # self.split_leaf(leaf)
-        # feature_list = []
-        # classes_list = []
-        # for data_input in data_array:
-        #    feature_list.append(data_input.features)
-        #    classes_list.append(data_input.class_expected.value)
-        # self.tree.fit(feature_list, classes_list)
 
     def predict_data(self, data_point: DataPoint) -> Classification:
         return data_point.class_expected
@@ -39,6 +32,8 @@ class DecisionTree(Algorithm):
         # return prediction_class
 
     def split_leaf(self, leaf: Leaf):
+        if leaf.entropy < self.theta:
+            return leaf
         new_node: Union[Inode, None] = None
         for feature_index in range(leaf.feature_len):
             feature = []
@@ -66,6 +61,8 @@ class DecisionTree(Algorithm):
                     new_node = temp_node
                 if new_node.entropy < self.theta:
                     return new_node
+        new_node.child_false = self.split_leaf(new_node.child_false)
+        new_node.child_true = self.split_leaf(new_node.child_true)
         return new_node
 
     def print_tree(self):
