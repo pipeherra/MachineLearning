@@ -24,12 +24,18 @@ class DecisionTree(Algorithm):
         self.root = self.split_leaf(self.root)
 
     def predict_data(self, data_point: DataPoint) -> Classification:
-        return data_point.class_expected
-        # prediction_array = self.tree.predict([data_point.features])
-        # prediction_value = prediction_array[0]
-        # prediction_class = self.to_classification(prediction_value)
-        # self.update_rates(data_point.class_expected, prediction_class)
-        # return prediction_class
+        prediction_class = self.get_classification(self.root, data_point.features)
+        self.update_rates(data_point.class_expected, prediction_class)
+        return prediction_class
+
+    def get_classification(self, node: Node, features: List) -> Classification:
+        if isinstance(node, Leaf):
+            return node.classification
+        if isinstance(node, Inode):
+            if features[node.split_index] < node.split_value:
+                return self.get_classification(node.child_true, features)
+            return self.get_classification(node.child_false, features)
+        raise AttributeError("Unknown class")
 
     def split_leaf(self, leaf: Leaf):
         if leaf.entropy < self.theta:
