@@ -74,7 +74,7 @@ class Algorithm(ABC):
             print("Predictions correct:\t{},\t{}%".format(self.prediction_correct_data_count, self.get_correct_ratio() * 100))
             print("Predictions wrong:  \t{},\t{}%".format(self.prediction_wrong_data_count, self.get_wrong_ratio() * 100))
             if len(self.classifications) == 2:
-                print("\nPositive = {}, Negative = {}".format(self.classifications[1].name, self.classifications[0].name))
+                print("Positive = {}, Negative = {}".format(self.classifications[1].name, self.classifications[0].name))
                 print("True  Positive:\t{},\t{}%".format(self.truePosData, self.get_tp_ratio() * 100))
                 print("True  Negative:\t{},\t{}%".format(self.trueNegData, self.get_tn_ratio() * 100))
                 print("False Positive:\t{},\t{}%".format(self.falsePosData, self.get_fp_ratio() * 100))

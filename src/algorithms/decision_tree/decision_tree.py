@@ -65,8 +65,8 @@ class DecisionTree(Algorithm):
                 temp_node = Inode(feature_index, window_max, leaf_true, leaf_false)
                 if new_node is None or new_node.entropy > temp_node.entropy:
                     new_node = temp_node
-                if new_node.entropy < self.theta:
-                    return new_node
+                # if new_node.entropy < self.theta:
+                #    return new_node
         new_node.child_false = self.split_leaf(new_node.child_false)
         new_node.child_true = self.split_leaf(new_node.child_true)
         return new_node

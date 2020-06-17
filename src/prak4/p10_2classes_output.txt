@@ -1,0 +1,563 @@
+/Users/andre/Documents/git/meuml/venv/bin/python /Users/andre/Documents/git/meuml/src/prak4/P10_2classes.py
+
+PLA (Learn-Rate: 0.1, Iterations: 10): Duration: 0.012169837951660156
+Predictions total:  	282,	100%
+Predictions correct:	191,	67.73049645390071%
+Predictions wrong:  	91,	32.269503546099294%
+Positive = Laufen, Negative = Drehen
+True  Positive:	156,	78.39195979899498%
+True  Negative:	35,	42.168674698795186%
+False Positive:	48,	57.831325301204814%
+False Negative:	43,	21.608040201005025%
+
+PLA (Learn-Rate: 0.1, Iterations: 100): Duration: 0.07630586624145508
+Predictions total:  	282,	100%
+Predictions correct:	229,	81.20567375886525%
+Predictions wrong:  	53,	18.79432624113475%
+Positive = Laufen, Negative = Drehen
+True  Positive:	193,	96.98492462311557%
+True  Negative:	36,	43.373493975903614%
+False Positive:	47,	56.62650602409639%
+False Negative:	6,	3.015075376884422%
+
+PLA (Learn-Rate: 0.1, Iterations: 1000): Duration: 0.7170279026031494
+Predictions total:  	282,	100%
+Predictions correct:	212,	75.177304964539%
+Predictions wrong:  	70,	24.822695035460992%
+Positive = Laufen, Negative = Drehen
+True  Positive:	134,	67.33668341708542%
+True  Negative:	78,	93.97590361445783%
+False Positive:	5,	6.024096385542169%
+False Negative:	65,	32.663316582914575%
+
+PLA (Learn-Rate: 0.1, Iterations: 10000): Duration: 7.7714009284973145
+Predictions total:  	282,	100%
+Predictions correct:	242,	85.81560283687944%
+Predictions wrong:  	40,	14.184397163120568%
+Positive = Laufen, Negative = Drehen
+True  Positive:	181,	90.95477386934674%
+True  Negative:	61,	73.49397590361446%
+False Positive:	22,	26.506024096385545%
+False Negative:	18,	9.045226130653267%
+
+PLA (Learn-Rate: 0.1, Iterations: 100000): Duration: 80.43174505233765
+Predictions total:  	282,	100%
+Predictions correct:	242,	85.81560283687944%
+Predictions wrong:  	40,	14.184397163120568%
+Positive = Laufen, Negative = Drehen
+True  Positive:	177,	88.94472361809045%
+True  Negative:	65,	78.3132530120482%
+False Positive:	18,	21.686746987951807%
+False Negative:	22,	11.055276381909549%
+
+PLA (Learn-Rate: 0.01, Iterations: 10): Duration: 0.010694742202758789
+Predictions total:  	282,	100%
+Predictions correct:	191,	67.73049645390071%
+Predictions wrong:  	91,	32.269503546099294%
+Positive = Laufen, Negative = Drehen
+True  Positive:	156,	78.39195979899498%
+True  Negative:	35,	42.168674698795186%
+False Positive:	48,	57.831325301204814%
+False Negative:	43,	21.608040201005025%
+
+PLA (Learn-Rate: 0.01, Iterations: 100): Duration: 0.07093000411987305
+Predictions total:  	282,	100%
+Predictions correct:	158,	56.02836879432624%
+Predictions wrong:  	124,	43.97163120567376%
+Positive = Laufen, Negative = Drehen
+True  Positive:	116,	58.291457286432156%
+True  Negative:	42,	50.602409638554214%
+False Positive:	41,	49.39759036144578%
+False Negative:	83,	41.70854271356784%
+
+PLA (Learn-Rate: 0.01, Iterations: 1000): Duration: 0.7622368335723877
+Predictions total:  	282,	100%
+Predictions correct:	242,	85.81560283687944%
+Predictions wrong:  	40,	14.184397163120568%
+Positive = Laufen, Negative = Drehen
+True  Positive:	171,	85.92964824120602%
+True  Negative:	71,	85.54216867469879%
+False Positive:	12,	14.457831325301203%
+False Negative:	28,	14.07035175879397%
+
+PLA (Learn-Rate: 0.01, Iterations: 10000): Duration: 9.043560981750488
+Predictions total:  	282,	100%
+Predictions correct:	242,	85.81560283687944%
+Predictions wrong:  	40,	14.184397163120568%
+Positive = Laufen, Negative = Drehen
+True  Positive:	181,	90.95477386934674%
+True  Negative:	61,	73.49397590361446%
+False Positive:	22,	26.506024096385545%
+False Negative:	18,	9.045226130653267%
+
+PLA (Learn-Rate: 0.01, Iterations: 100000): Duration: 80.45158696174622
+Predictions total:  	282,	100%
+Predictions correct:	243,	86.17021276595744%
+Predictions wrong:  	39,	13.829787234042554%
+Positive = Laufen, Negative = Drehen
+True  Positive:	179,	89.9497487437186%
+True  Negative:	64,	77.10843373493977%
+False Positive:	19,	22.89156626506024%
+False Negative:	20,	10.050251256281408%
+
+PLA (Learn-Rate: 0.001, Iterations: 10): Duration: 0.010563135147094727
+Predictions total:  	282,	100%
+Predictions correct:	191,	67.73049645390071%
+Predictions wrong:  	91,	32.269503546099294%
+Positive = Laufen, Negative = Drehen
+True  Positive:	156,	78.39195979899498%
+True  Negative:	35,	42.168674698795186%
+False Positive:	48,	57.831325301204814%
+False Negative:	43,	21.608040201005025%
+
+PLA (Learn-Rate: 0.001, Iterations: 100): Duration: 0.07265043258666992
+Predictions total:  	282,	100%
+Predictions correct:	155,	54.96453900709219%
+Predictions wrong:  	127,	45.0354609929078%
+Positive = Laufen, Negative = Drehen
+True  Positive:	120,	60.30150753768844%
+True  Negative:	35,	42.168674698795186%
+False Positive:	48,	57.831325301204814%
+False Negative:	79,	39.698492462311556%
+
+PLA (Learn-Rate: 0.001, Iterations: 1000): Duration: 0.6709530353546143
+Predictions total:  	282,	100%
+Predictions correct:	168,	59.57446808510638%
+Predictions wrong:  	114,	40.42553191489361%
+Positive = Laufen, Negative = Drehen
+True  Positive:	124,	62.311557788944725%
+True  Negative:	44,	53.01204819277109%
+False Positive:	39,	46.98795180722892%
+False Negative:	75,	37.68844221105528%
+
+PLA (Learn-Rate: 0.001, Iterations: 10000): Duration: 7.5570900440216064
+Predictions total:  	282,	100%
+Predictions correct:	231,	81.91489361702128%
+Predictions wrong:  	51,	18.085106382978726%
+Positive = Laufen, Negative = Drehen
+True  Positive:	164,	82.41206030150754%
+True  Negative:	67,	80.72289156626506%
+False Positive:	16,	19.27710843373494%
+False Negative:	35,	17.587939698492463%
+
+PLA (Learn-Rate: 0.001, Iterations: 100000): Duration: 77.46415591239929
+Predictions total:  	282,	100%
+Predictions correct:	240,	85.1063829787234%
+Predictions wrong:  	42,	14.893617021276595%
+Positive = Laufen, Negative = Drehen
+True  Positive:	175,	87.93969849246231%
+True  Negative:	65,	78.3132530120482%
+False Positive:	18,	21.686746987951807%
+False Negative:	24,	12.060301507537687%
+
+Pocket (Learn-Rate: 0.1, Iterations: 10): Duration: 0.011182785034179688
+Predictions total:  	282,	100%
+Predictions correct:	232,	82.26950354609929%
+Predictions wrong:  	50,	17.73049645390071%
+Positive = Laufen, Negative = Drehen
+True  Positive:	199,	100.0%
+True  Negative:	33,	39.75903614457831%
+False Positive:	50,	60.24096385542169%
+False Negative:	0,	0.0%
+
+Pocket (Learn-Rate: 0.1, Iterations: 100): Duration: 0.06884503364562988
+Predictions total:  	282,	100%
+Predictions correct:	233,	82.62411347517731%
+Predictions wrong:  	49,	17.375886524822697%
+Positive = Laufen, Negative = Drehen
+True  Positive:	198,	99.49748743718592%
+True  Negative:	35,	42.168674698795186%
+False Positive:	48,	57.831325301204814%
+False Negative:	1,	0.5025125628140703%
+
+Pocket (Learn-Rate: 0.1, Iterations: 1000): Duration: 0.7162678241729736
+Predictions total:  	282,	100%
+Predictions correct:	243,	86.17021276595744%
+Predictions wrong:  	39,	13.829787234042554%
+Positive = Laufen, Negative = Drehen
+True  Positive:	177,	88.94472361809045%
+True  Negative:	66,	79.51807228915662%
+False Positive:	17,	20.481927710843372%
+False Negative:	22,	11.055276381909549%
+
+Pocket (Learn-Rate: 0.1, Iterations: 10000): Duration: 7.756061315536499
+Predictions total:  	282,	100%
+Predictions correct:	246,	87.2340425531915%
+Predictions wrong:  	36,	12.76595744680851%
+Positive = Laufen, Negative = Drehen
+True  Positive:	179,	89.9497487437186%
+True  Negative:	67,	80.72289156626506%
+False Positive:	16,	19.27710843373494%
+False Negative:	20,	10.050251256281408%
+
+Pocket (Learn-Rate: 0.1, Iterations: 100000): Duration: 77.49176979064941
+Predictions total:  	282,	100%
+Predictions correct:	246,	87.2340425531915%
+Predictions wrong:  	36,	12.76595744680851%
+Positive = Laufen, Negative = Drehen
+True  Positive:	179,	89.9497487437186%
+True  Negative:	67,	80.72289156626506%
+False Positive:	16,	19.27710843373494%
+False Negative:	20,	10.050251256281408%
+
+Pocket (Learn-Rate: 0.01, Iterations: 10): Duration: 0.010933160781860352
+Predictions total:  	282,	100%
+Predictions correct:	191,	67.73049645390071%
+Predictions wrong:  	91,	32.269503546099294%
+Positive = Laufen, Negative = Drehen
+True  Positive:	156,	78.39195979899498%
+True  Negative:	35,	42.168674698795186%
+False Positive:	48,	57.831325301204814%
+False Negative:	43,	21.608040201005025%
+
+Pocket (Learn-Rate: 0.01, Iterations: 100): Duration: 0.07121586799621582
+Predictions total:  	282,	100%
+Predictions correct:	222,	78.72340425531915%
+Predictions wrong:  	60,	21.27659574468085%
+Positive = Laufen, Negative = Drehen
+True  Positive:	193,	96.98492462311557%
+True  Negative:	29,	34.93975903614458%
+False Positive:	54,	65.06024096385542%
+False Negative:	6,	3.015075376884422%
+
+Pocket (Learn-Rate: 0.01, Iterations: 1000): Duration: 0.7076044082641602
+Predictions total:  	282,	100%
+Predictions correct:	241,	85.46099290780141%
+Predictions wrong:  	41,	14.539007092198581%
+Positive = Laufen, Negative = Drehen
+True  Positive:	172,	86.4321608040201%
+True  Negative:	69,	83.13253012048193%
+False Positive:	14,	16.867469879518072%
+False Negative:	27,	13.5678391959799%
+
+Pocket (Learn-Rate: 0.01, Iterations: 10000): Duration: 7.5394062995910645
+Predictions total:  	282,	100%
+Predictions correct:	248,	87.94326241134752%
+Predictions wrong:  	34,	12.056737588652481%
+Positive = Laufen, Negative = Drehen
+True  Positive:	178,	89.44723618090453%
+True  Negative:	70,	84.33734939759037%
+False Positive:	13,	15.66265060240964%
+False Negative:	21,	10.552763819095476%
+
+Pocket (Learn-Rate: 0.01, Iterations: 100000): Duration: 74.96061396598816
+Predictions total:  	282,	100%
+Predictions correct:	248,	87.94326241134752%
+Predictions wrong:  	34,	12.056737588652481%
+Positive = Laufen, Negative = Drehen
+True  Positive:	178,	89.44723618090453%
+True  Negative:	70,	84.33734939759037%
+False Positive:	13,	15.66265060240964%
+False Negative:	21,	10.552763819095476%
+
+Pocket (Learn-Rate: 0.001, Iterations: 10): Duration: 0.010460853576660156
+Predictions total:  	282,	100%
+Predictions correct:	193,	68.43971631205675%
+Predictions wrong:  	89,	31.560283687943265%
+Positive = Laufen, Negative = Drehen
+True  Positive:	158,	79.39698492462311%
+True  Negative:	35,	42.168674698795186%
+False Positive:	48,	57.831325301204814%
+False Negative:	41,	20.603015075376884%
+
+Pocket (Learn-Rate: 0.001, Iterations: 100): Duration: 0.07039594650268555
+Predictions total:  	282,	100%
+Predictions correct:	193,	68.43971631205675%
+Predictions wrong:  	89,	31.560283687943265%
+Positive = Laufen, Negative = Drehen
+True  Positive:	158,	79.39698492462311%
+True  Negative:	35,	42.168674698795186%
+False Positive:	48,	57.831325301204814%
+False Negative:	41,	20.603015075376884%
+
+Pocket (Learn-Rate: 0.001, Iterations: 1000): Duration: 0.6775689125061035
+Predictions total:  	282,	100%
+Predictions correct:	193,	68.43971631205675%
+Predictions wrong:  	89,	31.560283687943265%
+Positive = Laufen, Negative = Drehen
+True  Positive:	158,	79.39698492462311%
+True  Negative:	35,	42.168674698795186%
+False Positive:	48,	57.831325301204814%
+False Negative:	41,	20.603015075376884%
+
+Pocket (Learn-Rate: 0.001, Iterations: 10000): Duration: 7.501934051513672
+Predictions total:  	282,	100%
+Predictions correct:	247,	87.58865248226951%
+Predictions wrong:  	35,	12.411347517730496%
+Positive = Laufen, Negative = Drehen
+True  Positive:	179,	89.9497487437186%
+True  Negative:	68,	81.92771084337349%
+False Positive:	15,	18.072289156626507%
+False Negative:	20,	10.050251256281408%
+
+Pocket (Learn-Rate: 0.001, Iterations: 100000): Duration: 78.38410091400146
+Predictions total:  	282,	100%
+Predictions correct:	247,	87.58865248226951%
+Predictions wrong:  	35,	12.411347517730496%
+Positive = Laufen, Negative = Drehen
+True  Positive:	179,	89.9497487437186%
+True  Negative:	68,	81.92771084337349%
+False Positive:	15,	18.072289156626507%
+False Negative:	20,	10.050251256281408%
+
+KNN (k: 3): Duration: 0.13831710815429688
+Predictions total:  	282,	100%
+Predictions correct:	276,	97.87234042553192%
+Predictions wrong:  	6,	2.127659574468085%
+Positive = Laufen, Negative = Drehen
+True  Positive:	195,	97.98994974874373%
+True  Negative:	81,	97.59036144578313%
+False Positive:	2,	2.4096385542168677%
+False Negative:	4,	2.0100502512562812%
+
+KNN (k: 7): Duration: 0.1402277946472168
+Predictions total:  	282,	100%
+Predictions correct:	274,	97.16312056737588%
+Predictions wrong:  	8,	2.8368794326241136%
+Positive = Laufen, Negative = Drehen
+True  Positive:	193,	96.98492462311557%
+True  Negative:	81,	97.59036144578313%
+False Positive:	2,	2.4096385542168677%
+False Negative:	6,	3.015075376884422%
+
+KNN (k: 11): Duration: 0.1415247917175293
+Predictions total:  	282,	100%
+Predictions correct:	273,	96.80851063829788%
+Predictions wrong:  	9,	3.1914893617021276%
+Positive = Laufen, Negative = Drehen
+True  Positive:	192,	96.4824120603015%
+True  Negative:	81,	97.59036144578313%
+False Positive:	2,	2.4096385542168677%
+False Negative:	7,	3.5175879396984926%
+
+KNN (k: 21): Duration: 0.14320015907287598
+Predictions total:  	282,	100%
+Predictions correct:	266,	94.32624113475178%
+Predictions wrong:  	16,	5.673758865248227%
+Positive = Laufen, Negative = Drehen
+True  Positive:	188,	94.47236180904522%
+True  Negative:	78,	93.97590361445783%
+False Positive:	5,	6.024096385542169%
+False Negative:	11,	5.527638190954774%
+
+KNN (k: 51): Duration: 0.15707898139953613
+Predictions total:  	282,	100%
+Predictions correct:	201,	71.27659574468085%
+Predictions wrong:  	81,	28.723404255319153%
+Positive = Laufen, Negative = Drehen
+True  Positive:	199,	100.0%
+True  Negative:	2,	2.4096385542168677%
+False Positive:	81,	97.59036144578313%
+False Negative:	0,	0.0%
+
+KNN (k: 101): Duration: 0.17699813842773438
+Predictions total:  	282,	100%
+Predictions correct:	199,	70.56737588652481%
+Predictions wrong:  	83,	29.432624113475175%
+Positive = Laufen, Negative = Drehen
+True  Positive:	199,	100.0%
+True  Negative:	0,	0.0%
+False Positive:	83,	100.0%
+False Negative:	0,	0.0%
+
+Decision-Tree (Theta: 0.1, Window-Count: 5): Duration 0.03127884864807129
+Predictions total:  	282,	100%
+Predictions correct:	265,	93.97163120567376%
+Predictions wrong:  	17,	6.028368794326241%
+Positive = Laufen, Negative = Drehen
+True  Positive:	191,	95.97989949748744%
+True  Negative:	74,	89.1566265060241%
+False Positive:	9,	10.843373493975903%
+False Negative:	8,	4.0201005025125625%
+
+Decision-Tree (Theta: 0.1, Window-Count: 10): Duration 0.05651712417602539
+Predictions total:  	282,	100%
+Predictions correct:	261,	92.5531914893617%
+Predictions wrong:  	21,	7.446808510638298%
+Positive = Laufen, Negative = Drehen
+True  Positive:	188,	94.47236180904522%
+True  Negative:	73,	87.95180722891565%
+False Positive:	10,	12.048192771084338%
+False Negative:	11,	5.527638190954774%
+
+Decision-Tree (Theta: 0.1, Window-Count: 20): Duration 0.11151528358459473
+Predictions total:  	282,	100%
+Predictions correct:	268,	95.0354609929078%
+Predictions wrong:  	14,	4.964539007092199%
+Positive = Laufen, Negative = Drehen
+True  Positive:	193,	96.98492462311557%
+True  Negative:	75,	90.36144578313254%
+False Positive:	8,	9.63855421686747%
+False Negative:	6,	3.015075376884422%
+
+Decision-Tree (Theta: 0.1, Window-Count: 40): Duration 0.2118380069732666
+Predictions total:  	282,	100%
+Predictions correct:	269,	95.39007092198581%
+Predictions wrong:  	13,	4.609929078014184%
+Positive = Laufen, Negative = Drehen
+True  Positive:	194,	97.48743718592965%
+True  Negative:	75,	90.36144578313254%
+False Positive:	8,	9.63855421686747%
+False Negative:	5,	2.512562814070352%
+
+Decision-Tree (Theta: 0.1, Window-Count: 80): Duration 0.416611909866333
+Predictions total:  	282,	100%
+Predictions correct:	264,	93.61702127659575%
+Predictions wrong:  	18,	6.382978723404255%
+Positive = Laufen, Negative = Drehen
+True  Positive:	192,	96.4824120603015%
+True  Negative:	72,	86.74698795180723%
+False Positive:	11,	13.253012048192772%
+False Negative:	7,	3.5175879396984926%
+
+Decision-Tree (Theta: 0.01, Window-Count: 5): Duration 0.03158998489379883
+Predictions total:  	282,	100%
+Predictions correct:	265,	93.97163120567376%
+Predictions wrong:  	17,	6.028368794326241%
+Positive = Laufen, Negative = Drehen
+True  Positive:	191,	95.97989949748744%
+True  Negative:	74,	89.1566265060241%
+False Positive:	9,	10.843373493975903%
+False Negative:	8,	4.0201005025125625%
+
+Decision-Tree (Theta: 0.01, Window-Count: 10): Duration 0.05814981460571289
+Predictions total:  	282,	100%
+Predictions correct:	260,	92.19858156028369%
+Predictions wrong:  	22,	7.801418439716312%
+Positive = Laufen, Negative = Drehen
+True  Positive:	187,	93.96984924623115%
+True  Negative:	73,	87.95180722891565%
+False Positive:	10,	12.048192771084338%
+False Negative:	12,	6.030150753768844%
+
+Decision-Tree (Theta: 0.01, Window-Count: 20): Duration 0.1296830177307129
+Predictions total:  	282,	100%
+Predictions correct:	268,	95.0354609929078%
+Predictions wrong:  	14,	4.964539007092199%
+Positive = Laufen, Negative = Drehen
+True  Positive:	193,	96.98492462311557%
+True  Negative:	75,	90.36144578313254%
+False Positive:	8,	9.63855421686747%
+False Negative:	6,	3.015075376884422%
+
+Decision-Tree (Theta: 0.01, Window-Count: 40): Duration 0.3153650760650635
+Predictions total:  	282,	100%
+Predictions correct:	269,	95.39007092198581%
+Predictions wrong:  	13,	4.609929078014184%
+Positive = Laufen, Negative = Drehen
+True  Positive:	194,	97.48743718592965%
+True  Negative:	75,	90.36144578313254%
+False Positive:	8,	9.63855421686747%
+False Negative:	5,	2.512562814070352%
+
+Decision-Tree (Theta: 0.01, Window-Count: 80): Duration 0.610482931137085
+Predictions total:  	282,	100%
+Predictions correct:	262,	92.90780141843972%
+Predictions wrong:  	20,	7.092198581560284%
+Positive = Laufen, Negative = Drehen
+True  Positive:	188,	94.47236180904522%
+True  Negative:	74,	89.1566265060241%
+False Positive:	9,	10.843373493975903%
+False Negative:	11,	5.527638190954774%
+
+Decision-Tree (Theta: 0.001, Window-Count: 5): Duration 0.0319361686706543
+Predictions total:  	282,	100%
+Predictions correct:	265,	93.97163120567376%
+Predictions wrong:  	17,	6.028368794326241%
+Positive = Laufen, Negative = Drehen
+True  Positive:	191,	95.97989949748744%
+True  Negative:	74,	89.1566265060241%
+False Positive:	9,	10.843373493975903%
+False Negative:	8,	4.0201005025125625%
+
+Decision-Tree (Theta: 0.001, Window-Count: 10): Duration 0.05844473838806152
+Predictions total:  	282,	100%
+Predictions correct:	260,	92.19858156028369%
+Predictions wrong:  	22,	7.801418439716312%
+Positive = Laufen, Negative = Drehen
+True  Positive:	187,	93.96984924623115%
+True  Negative:	73,	87.95180722891565%
+False Positive:	10,	12.048192771084338%
+False Negative:	12,	6.030150753768844%
+
+Decision-Tree (Theta: 0.001, Window-Count: 20): Duration 0.129410982131958
+Predictions total:  	282,	100%
+Predictions correct:	268,	95.0354609929078%
+Predictions wrong:  	14,	4.964539007092199%
+Positive = Laufen, Negative = Drehen
+True  Positive:	193,	96.98492462311557%
+True  Negative:	75,	90.36144578313254%
+False Positive:	8,	9.63855421686747%
+False Negative:	6,	3.015075376884422%
+
+Decision-Tree (Theta: 0.001, Window-Count: 40): Duration 0.30486035346984863
+Predictions total:  	282,	100%
+Predictions correct:	269,	95.39007092198581%
+Predictions wrong:  	13,	4.609929078014184%
+Positive = Laufen, Negative = Drehen
+True  Positive:	194,	97.48743718592965%
+True  Negative:	75,	90.36144578313254%
+False Positive:	8,	9.63855421686747%
+False Negative:	5,	2.512562814070352%
+
+Decision-Tree (Theta: 0.001, Window-Count: 80): Duration 0.6178390979766846
+Predictions total:  	282,	100%
+Predictions correct:	262,	92.90780141843972%
+Predictions wrong:  	20,	7.092198581560284%
+Positive = Laufen, Negative = Drehen
+True  Positive:	188,	94.47236180904522%
+True  Negative:	74,	89.1566265060241%
+False Positive:	9,	10.843373493975903%
+False Negative:	11,	5.527638190954774%
+
+Decision-Tree (Theta: 0.0001, Window-Count: 5): Duration 0.032160043716430664
+Predictions total:  	282,	100%
+Predictions correct:	265,	93.97163120567376%
+Predictions wrong:  	17,	6.028368794326241%
+Positive = Laufen, Negative = Drehen
+True  Positive:	191,	95.97989949748744%
+True  Negative:	74,	89.1566265060241%
+False Positive:	9,	10.843373493975903%
+False Negative:	8,	4.0201005025125625%
+
+Decision-Tree (Theta: 0.0001, Window-Count: 10): Duration 0.059571027755737305
+Predictions total:  	282,	100%
+Predictions correct:	260,	92.19858156028369%
+Predictions wrong:  	22,	7.801418439716312%
+Positive = Laufen, Negative = Drehen
+True  Positive:	187,	93.96984924623115%
+True  Negative:	73,	87.95180722891565%
+False Positive:	10,	12.048192771084338%
+False Negative:	12,	6.030150753768844%
+
+Decision-Tree (Theta: 0.0001, Window-Count: 20): Duration 0.1266939640045166
+Predictions total:  	282,	100%
+Predictions correct:	268,	95.0354609929078%
+Predictions wrong:  	14,	4.964539007092199%
+Positive = Laufen, Negative = Drehen
+True  Positive:	193,	96.98492462311557%
+True  Negative:	75,	90.36144578313254%
+False Positive:	8,	9.63855421686747%
+False Negative:	6,	3.015075376884422%
+
+Decision-Tree (Theta: 0.0001, Window-Count: 40): Duration 0.30325889587402344
+Predictions total:  	282,	100%
+Predictions correct:	269,	95.39007092198581%
+Predictions wrong:  	13,	4.609929078014184%
+Positive = Laufen, Negative = Drehen
+True  Positive:	194,	97.48743718592965%
+True  Negative:	75,	90.36144578313254%
+False Positive:	8,	9.63855421686747%
+False Negative:	5,	2.512562814070352%
+
+Decision-Tree (Theta: 0.0001, Window-Count: 80): Duration 0.6182918548583984
+Predictions total:  	282,	100%
+Predictions correct:	262,	92.90780141843972%
+Predictions wrong:  	20,	7.092198581560284%
+Positive = Laufen, Negative = Drehen
+True  Positive:	188,	94.47236180904522%
+True  Negative:	74,	89.1566265060241%
+False Positive:	9,	10.843373493975903%
+False Negative:	11,	5.527638190954774%
+
+Process finished with exit code 0

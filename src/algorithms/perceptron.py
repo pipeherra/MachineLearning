@@ -27,7 +27,8 @@ class Perceptron(Algorithm):
         last_wrong_predictions = wrong_predictions
         weights = self.weights.copy()
         for i in range(len(data_array)):
-            data_array[i].features = [1.0] + data_array[i].features
+            if len(data_array[i].features) < len(weights):
+                data_array[i].features = [1.0] + data_array[i].features
         while wrong_predictions != 0 and updates < self.max_iterations:
             wrong_predictions = 0
             for training_data in data_array:
