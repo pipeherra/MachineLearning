@@ -1,12 +1,12 @@
-import src.algorithmen.nearest_neighbors as nn
+import algorithmen.nearest_neighbors as nn
 import numpy as np
 from statistics import *
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from src.misc.sensor import Sensor
-from src.prak4.P9_data import P9Data
-from src.signals.statistics import Statistics
+from misc.sensor import Sensor
+from prak4.P9_data import P9Data
+from signals.statistics import Statistics
 
 
 def unique_vals(rows, col):
@@ -250,16 +250,18 @@ if __name__ == '__main__':
     teach_train_limit = int(np.round(teach_ratio * len(data_array)))
 
     # Train
-    for x in range(0, teach_train_limit):
-        data = data_array[x]
-        my_tree = build_tree(data.gehen_features)
-        my_tree = build_tree(data.ruhe_features)
+    #for x in range(0, teach_train_limit):
 
-    # Test
-    detected = [1, 2, 3]
-    for x in range(teach_train_limit, len(data_array)):
-        data = data_array[x]
-        print("Actual: %s. Predicted: %s" %
-              (x[-1], print_leaf(classify(x, my_tree))))
+    data_gehen = np.hstack(gehen_features, )
 
-    print_tree(my_tree)
+
+    print(gehen_features)
+    # my_tree = build_tree(data.gehen_features)
+    # my_tree = build_tree(data.ruhe_features)
+    # # Test
+    # for x in range(teach_train_limit, len(data_array)):
+    #     data = data_array[x]
+    #     print("Actual: %s. Predicted: %s" %
+    #           (x[-1], print_leaf(classify(x, my_tree))))
+    #
+    # print_tree(my_tree)

@@ -11,7 +11,7 @@ from metrics.euclidean import Euclidean
 from misc.classification import Classification
 from misc.feature_config import FeatureConfig
 from signals.windowed_signal import WindowedSignal
-from src.misc.sensor import Sensor
+from misc.sensor import Sensor
 from stats.standard_deviation import StandardDeviation
 
 ruhe_classification = Classification(0.0, "Ruhe")

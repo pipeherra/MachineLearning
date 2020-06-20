@@ -6,3 +6,6 @@ class P9Data:
         self.ruhe_features = ruhe_features
         self.gehen_features = gehen_features
         self.huepfen_features = huepfen_features
+        self.ruhe_label = 'ruhe'
+        self.gehen_label = 'gehen'
+        self.huepfen_label = 'huepfen'
