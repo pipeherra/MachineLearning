@@ -9,3 +9,6 @@ class Chessboard(Metric):
         for i in range(0, len(point_a.features)):
             distance = max(distance, abs(point_a.features[i] - point_b.features[i]))
         return distance
+
+    def __str__(self):
+        return "Chessboard"

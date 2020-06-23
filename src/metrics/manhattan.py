@@ -8,3 +8,6 @@ class Manhattan(Metric):
         for i in range(0, len(point_a.features)):
             distance += abs(point_a.features[i] - point_b.features[i])
         return distance
+
+    def __str__(self):
+        return "Manhattan"

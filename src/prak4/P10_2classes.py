@@ -9,7 +9,9 @@ from algorithms.decision_tree.decision_tree import DecisionTree
 from algorithms.nearest_neighbors import NearestNeighbour
 from algorithms.perceptron import Perceptron
 from algorithms.transfers.signum import Signum
+from metrics.chessboard import Chessboard
 from metrics.euclidean import Euclidean
+from metrics.manhattan import Manhattan
 from misc.classification import Classification
 from misc.feature_config import FeatureConfig
 from misc.sensor import Sensor
@@ -69,8 +71,8 @@ enabled_classifications = [
     laufen_classification,
 ]
 
-window_size = 500  # timestamps
-window_moving = 200
+window_size = 250  # timestamps
+window_moving = 100
 stddev = StandardDeviation()
 feature_configs = [FeatureConfig("accelX (m/s^2)", stddev, Sensor.get_sensor_ruecken()),
                    FeatureConfig("accelX (m/s^2)", stddev, Sensor.get_sensor_oberschenkel()),
@@ -169,25 +171,28 @@ for learn_rate in [0.1, 0.01, 0.001]:
 
 ws_knn = workbook.add_worksheet("KNN")
 ws_knn.write(0, 0, "K")
-write_header(ws_knn, 1)
+ws_knn.write(0, 1, "Metric")
+write_header(ws_knn, 2)
 ws_knn_row = 1
 
 for k in [3, 7, 11, 21, 51, 101]:
-    start = time.time()
-    knn = NearestNeighbour(k, Euclidean(), enabled_classifications)
-    knn.train_data(train_data_points)
-    for data_point in predict_data_points:
-        knn.predict_data(data_point)
-    end = time.time()
-    print("KNN (k: {}): Success-Rate: {}".format(k, knn.get_correct_ratio()))
-    duration = end-start
-    ws_summary.write(ws_summary_row, 0, "KNN")
-    ws_summary.write(ws_summary_row, 1, "k: {}".format(k))
-    write_stat(ws_summary, ws_summary_row, 2, knn, duration)
-    ws_summary_row += 1
-    ws_knn.write(ws_knn_row, 0, k)
-    write_stat(ws_knn, ws_knn_row, 1, knn, duration)
-    ws_knn_row += 1
+    for metric in [Chessboard(), Euclidean(), Manhattan()]:
+        start = time.time()
+        knn = NearestNeighbour(k, Euclidean(), enabled_classifications)
+        knn.train_data(train_data_points)
+        for data_point in predict_data_points:
+            knn.predict_data(data_point)
+        end = time.time()
+        print("KNN (k: {}, Metric: {}): Success-Rate: {}".format(k, metric, knn.get_correct_ratio()))
+        duration = end-start
+        ws_summary.write(ws_summary_row, 0, "KNN")
+        ws_summary.write(ws_summary_row, 1, "k: {}, metric: {}".format(k, metric))
+        write_stat(ws_summary, ws_summary_row, 2, knn, duration)
+        ws_summary_row += 1
+        ws_knn.write(ws_knn_row, 0, k)
+        ws_knn.write(ws_knn_row, 1, str(metric))
+        write_stat(ws_knn, ws_knn_row, 1, knn, duration)
+        ws_knn_row += 1
 
 ws_dt = workbook.add_worksheet("Decision-Tree")
 ws_dt.write(0, 0, "Theta")

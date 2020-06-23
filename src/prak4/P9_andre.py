@@ -28,7 +28,7 @@ enabled_classifications = [
     laufen_classification,
 ]
 
-window_size = 500  # timestamps
+window_size = 500  # timestamps (ms)
 window_moving = 200
 stddev = StandardDeviation()
 feature_configs = [FeatureConfig("accelX (m/s^2)", stddev, Sensor.get_sensor_ruecken()),

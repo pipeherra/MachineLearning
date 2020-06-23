@@ -8,3 +8,6 @@ class Euclidean(Metric):
         for i in range(0, len(point_a.features)):
             distance += pow((abs(point_a.features[i] - point_b.features[i])), 2)
         return pow(distance, 1 / 2)
+
+    def __str__(self):
+        return "Euclidean"
